@@ -3,11 +3,11 @@
 # Intel 8080 + CP/M 2.2 — целиком на FBD в CODESYS 3.5
 
 **Эмулятор процессора, операционная система и промышленный ввод-вывод, нарисованные релейными схемами ПЛК.**
-Ни одной строки ST в логике. Ни одной готовой библиотеки. 218 тестов — 218 PASS.
+Ни одной строки ST в логике. Ни одной готовой библиотеки. 218 тестов: 199/199 ядра и 10/10 ввода-вывода подтверждены прогоном, слой CP/M — в работе, см. врезку о статусе.
 
 [![CODESYS](https://img.shields.io/badge/CODESYS-3.5%20SP17%20Patch%203-0b6eb8)](https://www.codesys.com/)
 [![Logic](https://img.shields.io/badge/logic-FBD%20only-c0392b)](#жёсткие-ограничения-проекта)
-[![Tests](https://img.shields.io/badge/tests-218%2F218%20PASS-2e7d32)](#результаты-проверено-прогоном)
+[![Tests](https://img.shields.io/badge/tests-218%2F218%20in%20project%2C%20209%20verified-2e7d32)](#результаты-проверено-прогоном)
 [![FBD blocks](https://img.shields.io/badge/FBD%20blocks-5%20255-6a1b9a)](#масштаб)
 [![License](https://img.shields.io/badge/license-CC%20BY%204.0-ef6c00)](LICENSE)
 
@@ -23,7 +23,7 @@ A complete **Intel 8080 CPU emulator**, a **CP/M 2.2 operating system layer** (B
 and a **PLC hardware I/O layer**, implemented **entirely in FBD function-block diagrams inside CODESYS V3.5 SP17 Patch 3** —
 no structured text for logic, no ready-made emulator libraries, no CFC. Every POU is generated from Python via
 PLCopenXML (`generator/`), one 8080 machine cycle equals one PLC scan, and the whole system is verified by
-**218 automated tests (199 core + 9 CP/M + 10 I/O), all passing** in the CODESYS simulator: `0 errors, 0 warnings`,
+**218 automated tests (199 core + 9 CP/M + 10 I/O)** in the CODESYS simulator: **199/199 core and 10/10 I/O verified**, `0 errors, 0 warnings`,
 5 255 FBD blocks, 16 606 connections, 0 unconnected inputs.
 
 The repository also documents **43 classes of real defects** found while generating FBD from PLCopenXML and the
@@ -177,7 +177,7 @@ flowchart LR
   ровно как в настоящем CP/M, где BDOS надолго занимает процессор.
 * Формат диска настоящий: каталог `DRM+1` записей по 32 байта, блоки `128 << BSH` байт, битовая карта занятости,
   FCB 36 байт. Профили: **дискета 256 КБ** (`SPT=26, BSH=3, DSM=242, DRM=63`) и **жёсткий диск 8 МБ**
-  (`SPT=128, BSH=5, DSM=2047, DRM=1023`) — оба прогнаны с одинаковым результатом 218/218.
+  (`SPT=128, BSH=5, DSM=2047, DRM=1023`) — оба прогнаны: результаты прогонов — в [15_ПРОВЕРКА_ПЕРЕД_СДАЧЕЙ.md](docs/15_ПРОВЕРКА_ПЕРЕД_СДАЧЕЙ.md).
 
 На дисковом образе лежат **четыре настоящих файла**, собранных мини-ассемблером прямо в Python (`pou_demo.py`):
 
@@ -228,7 +228,7 @@ cd generator\tools
 ```
 
 Результат прогона: `log\gen_stage4.log` (ход сборки и цифры тестов) и `report\stage4_report.md`
-(таблица «тест → ожидание → факт → PASS/FAIL» по всем 218 кейсам + расшифровка журнала консоли CP/M).
+(таблица «тест → ожидание → факт → PASS/FAIL» по 199 кейсам ядра + расшифровка и дамп журнала консоли CP/M).
 Каталоги можно задать явно при своих путях: `.\setup_work.ps1 -WorkRoot D:\emu8080 -WithDeps`.
 
 Требования: CODESYS 3.5 SP17 Patch 3 (скриптовый движок IronPython 2.7 встроенный), Windows, закрытые экземпляры
@@ -247,7 +247,7 @@ python tools\check_names.py              # имена против ключев�
 ```
 
 Отчёт прогона формируется автоматически: `report/stage4_report.md` — таблица «тест → ожидание → факт → PASS/FAIL»
-по всем 218 кейсам плюс расшифровка журнала консоли CP/M.
+по 199 кейсам ядра плюс расшифровка и дамп журнала консоли CP/M.
 
 ---
 
@@ -309,7 +309,7 @@ python tools\check_names.py              # имена против ключев�
 | [03_ЖУРНАЛ_СБОРКИ](docs/03_ЖУРНАЛ_СБОРКИ.md) | Хроника сборки и разбора дефектов |
 | [07_ПЛАН_ДОВОДКИ](docs/07_ПЛАН_ДОВОДКИ.md) | История доводки: 40 разделов с находками |
 | [09_ПРОТОКОЛ_ПРОГОНА](docs/09_ПРОТОКОЛ_ПРОГОНА.md) | Протокол прогона: таблица результатов |
-| [14_РЕЗУЛЬТАТЫ_ТЕСТОВ](docs/14_РЕЗУЛЬТАТЫ_ТЕСТОВ.md) | Итоговые 218/218 и честный список того, что не закрыто |
+| [14_РЕЗУЛЬТАТЫ_ТЕСТОВ](docs/14_РЕЗУЛЬТАТЫ_ТЕСТОВ.md) | Результаты прогонов и честный список того, что не закрыто |
 | [06_ЧТО_ОСТАЛОСЬ](docs/06_ЧТО_ОСТАЛОСЬ.md) | Снимок невыполненных пунктов ТЗ на середину работы |
 | [08_ПРОМЕЖУТОЧНЫЙ_ОТЧЁТ](docs/08_ПРОМЕЖУТОЧНЫЙ_ОТЧЁТ.md) | Отчёт о состоянии на промежуточном этапе |
 | [КОНСПЕКТЫ_ДЛЯ_КОЛЛЕГ](docs/КОНСПЕКТЫ_ДЛЯ_КОЛЛЕГ/00_ГЛАВНОЕ.md) | Пять конспектов: окружение, диалект FBD, ошибки компиляции, локализация бисекцией, прогон |
