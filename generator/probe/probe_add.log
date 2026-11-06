@@ -1,0 +1,15 @@
+[i] python = 2.7.7 (CODESYS.exe CODESYS V3.5 SP17 Patch 3, ScriptEngine.plugin 4.0.0.0)
+[1] projects.create OK
+[2] create_device_identification -> <_3S.CoDeSys.ScriptDriverDeviceObject.DeviceId object at 0x0000000000000087 [DeviceID(type=4096, Id='0000 0001', Version='3.5.17.30')]>
+[3] add(name,type,id,version) -> OK None
+[4] --- TREE ---
+- ? [ExtendedObject[IScriptProject]]
+  - Project Settings [ExtendedObject[IScriptObject]]
+  - __VisualizationStyle [ExtendedObject[IScriptObject]]
+  - Device [ExtendedObject[IScriptObject]]
+    - Plc Logic [ExtendedObject[IScriptObject]]
+      - Application [ExtendedObject[IScriptObject]]
+        - Library Manager [ExtendedObject[IScriptObject]]
+[5] active_application -> Application
+[7] saved
+=== DONE ===

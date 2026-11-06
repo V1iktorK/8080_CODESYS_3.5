@@ -1,0 +1,30 @@
+=== ШАГ 3.2: АЛУ, коммутация, память, стек ===
+[1] PLCopenXML записан: 215151 символов
+    POU: FB_DecodeRegSel, FB_Mux8x8, FB_Mux8x16, FB_ALU8, FB_Memory64K, FB_Stack16
+    projects.create OK -> C:/Users/Ольга/OneDrive/Рабочий стол/CODESYS/8080_EMU/build/EMU8080.project
+    устройство добавлено: type=4096 id=0000 0001 version=3.5.17.30
+    application = Application
+    GVL GVL_MEM создана (102 символов объявления)
+    базовые FB импортированы
+    импортировано по одному файлу: 6 POU
+    СГЕНЕРИРОВАНО : блоков=117 связей=320 пустых.входов=0
+    --- дерево Application после импорта ---
+  - Application [ExtendedObject[IScriptObject]]
+    - Library Manager [ExtendedObject[IScriptObject]]
+    - GVL_MEM [ExtendedObject[IScriptObject]]
+    - FB_Reg8 [ExtendedObject[IScriptObject]]
+    - FB_Reg16 [ExtendedObject[IScriptObject]]
+    - FB_UnpackByte [ExtendedObject[IScriptObject]]
+    - FB_PackByte [ExtendedObject[IScriptObject]]
+    - FB_FullAdder [ExtendedObject[IScriptObject]]
+    - FB_DecodeRegSel [ExtendedObject[IScriptObject]]
+    - FB_Mux8x8 [ExtendedObject[IScriptObject]]
+    - FB_Mux8x16 [ExtendedObject[IScriptObject]]
+    - FB_ALU8 [ExtendedObject[IScriptObject]]
+    - FB_Memory64K [ExtendedObject[IScriptObject]]
+    - FB_Stack16 [ExtendedObject[IScriptObject]]
+    ПОСЛЕ ИМПОРТА: блоков=117 связей=298 пустых.входов=0
+    ПРОВЕРКА СВЯЗЕЙ: OK (117 блоков, все входы подключены)
+    build() выполнен (сообщения компилятора — в <скрипт>.stdout.txt)
+[3] ИТОГ: УСПЕХ
+=== DONE ===

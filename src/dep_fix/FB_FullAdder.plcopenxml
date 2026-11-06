@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project xmlns="http://www.plcopen.org/xml/tc6_0200">
+  <fileHeader companyName="" productName="CODESYS" productVersion="CODESYS V3.5 SP17 Patch 3" creationDateTime="2026-01-01T00:00:00" />
+  <contentHeader name="FB_FullAdder">
+    <coordinateInfo>
+      <fbd><scaling x="1" y="1" /></fbd>
+      <ld><scaling x="1" y="1" /></ld>
+      <sfc><scaling x="1" y="1" /></sfc>
+    </coordinateInfo>
+  </contentHeader>
+  <types>
+    <dataTypes />
+    <pous>
+      <pou name="FB_FullAdder" pouType="functionBlock">
+        <interface>
+          <inputVars>
+            <variable name="A"><type><BOOL /></type></variable>
+            <variable name="B"><type><BOOL /></type></variable>
+            <variable name="Cin"><type><BOOL /></type></variable>
+          </inputVars>
+          <outputVars>
+            <variable name="Sum"><type><BOOL /></type></variable>
+            <variable name="Cout"><type><BOOL /></type></variable>
+          </outputVars>
+        </interface>
+        <body>
+          <FBD>
+            <!-- СЕТЬ 1. Сумма: Sum := A XOR B XOR Cin -->
+            <inVariable localId="1" height="10" width="29">
+              <position x="40" y="40" />
+              <connectionPointOut><relPosition x="29" y="5" /></connectionPointOut>
+              <expression>A</expression>
+            </inVariable>
+            <inVariable localId="2" height="10" width="29">
+              <position x="40" y="70" />
+              <connectionPointOut><relPosition x="29" y="5" /></connectionPointOut>
+              <expression>B</expression>
+            </inVariable>
+            <inVariable localId="3" height="10" width="47">
+              <position x="40" y="100" />
+              <connectionPointOut><relPosition x="47" y="5" /></connectionPointOut>
+              <expression>Cin</expression>
+            </inVariable>
+            <block localId="4" typeName="XOR" height="30" width="64">
+              <position x="200" y="130" />
+              <inputVariables>
+                <variable formalParameter="IN1">
+                  <connectionPointIn>
+                    <relPosition x="0" y="5" />
+                    <connection refLocalId="1" />
+                  </connectionPointIn>
+                </variable>
+                <variable formalParameter="IN2">
+                  <connectionPointIn>
+                    <relPosition x="0" y="15" />
+                    <connection refLocalId="2" />
+                  </connectionPointIn>
+                </variable>
+              </inputVariables>
+              <inOutVariables />
+              <outputVariables>
+                <variable formalParameter="OUT">
+                  <connectionPointOut>
+                    <relPosition x="64" y="5" />
+                  </connectionPointOut>
+                </variable>
+              </outputVariables>
+            </block>
+            <block localId="5" typeName="XOR" height="30" width="64">
+              <position x="360" y="160" />
+              <inputVariables>
+                <variable formalParameter="IN1">
+                  <connectionPointIn>
+                    <relPosition x="0" y="5" />
+                    <connection refLocalId="4" />
+                  </connectionPointIn>
+                </variable>
+                <variable formalParameter="IN2">
+                  <connectionPointIn>
+                    <relPosition x="0" y="15" />
+                    <connection refLocalId="3" />
+                  </connectionPointIn>
+                </variable>
+              </inputVariables>
+              <inOutVariables />
+              <outputVariables>
+                <variable formalParameter="OUT">
+                  <connectionPointOut>
+                    <relPosition x="64" y="5" />
+                  </connectionPointOut>
+                </variable>
+              </outputVariables>
+            </block>
+            <outVariable localId="6" height="10" width="47">
+              <position x="520" y="190" />
+              <connectionPointIn>
+                <relPosition x="0" y="5" />
+                <connection refLocalId="5" />
+              </connectionPointIn>
+              <expression>Sum</expression>
+            </outVariable>
+            <!-- СЕТЬ 2. Перенос: Cout := (A AND B) OR (Cin AND (A XOR B)) -->
+            <inVariable localId="7" height="10" width="29">
+              <position x="40" y="40" />
+              <connectionPointOut><relPosition x="29" y="5" /></connectionPointOut>
+              <expression>A</expression>
+            </inVariable>
+            <inVariable localId="8" height="10" width="29">
+              <position x="40" y="70" />
+              <connectionPointOut><relPosition x="29" y="5" /></connectionPointOut>
+              <expression>B</expression>
+            </inVariable>
+            <inVariable localId="9" height="10" width="47">
+              <position x="40" y="100" />
+              <connectionPointOut><relPosition x="47" y="5" /></connectionPointOut>
+              <expression>Cin</expression>
+            </inVariable>
+            <block localId="10" typeName="XOR" height="30" width="64">
+              <position x="200" y="130" />
+              <inputVariables>
+                <variable formalParameter="IN1">
+                  <connectionPointIn>
+                    <relPosition x="0" y="5" />
+                    <connection refLocalId="7" />
+                  </connectionPointIn>
+                </variable>
+                <variable formalParameter="IN2">
+                  <connectionPointIn>
+                    <relPosition x="0" y="15" />
+                    <connection refLocalId="8" />
+                  </connectionPointIn>
+                </variable>
+              </inputVariables>
+              <inOutVariables />
+              <outputVariables>
+                <variable formalParameter="OUT">
+                  <connectionPointOut>
+                    <relPosition x="64" y="5" />
+                  </connectionPointOut>
+                </variable>
+              </outputVariables>
+            </block>
+            <inVariable localId="15" height="10" width="29">
+              <position x="40" y="52" />
+              <connectionPointOut><relPosition x="29" y="5" /></connectionPointOut>
+              <expression>A</expression>
+            </inVariable>
+            <inVariable localId="16" height="10" width="29">
+              <position x="40" y="82" />
+              <connectionPointOut><relPosition x="29" y="5" /></connectionPointOut>
+              <expression>B</expression>
+            </inVariable>
+            <block localId="11" typeName="AND" height="30" width="64">
+              <position x="200" y="160" />
+              <inputVariables>
+                <variable formalParameter="IN1">
+                  <connectionPointIn>
+                    <relPosition x="0" y="5" />
+                    <connection refLocalId="15" />
+                  </connectionPointIn>
+                </variable>
+                <variable formalParameter="IN2">
+                  <connectionPointIn>
+                    <relPosition x="0" y="15" />
+                    <connection refLocalId="16" />
+                  </connectionPointIn>
+                </variable>
+              </inputVariables>
+              <inOutVariables />
+              <outputVariables>
+                <variable formalParameter="OUT">
+                  <connectionPointOut>
+                    <relPosition x="64" y="5" />
+                  </connectionPointOut>
+                </variable>
+              </outputVariables>
+            </block>
+            <block localId="12" typeName="AND" height="30" width="64">
+              <position x="360" y="190" />
+              <inputVariables>
+                <variable formalParameter="IN1">
+                  <connectionPointIn>
+                    <relPosition x="0" y="5" />
+                    <connection refLocalId="9" />
+                  </connectionPointIn>
+                </variable>
+                <variable formalParameter="IN2">
+                  <connectionPointIn>
+                    <relPosition x="0" y="15" />
+                    <connection refLocalId="10" />
+                  </connectionPointIn>
+                </variable>
+              </inputVariables>
+              <inOutVariables />
+              <outputVariables>
+                <variable formalParameter="OUT">
+                  <connectionPointOut>
+                    <relPosition x="64" y="5" />
+                  </connectionPointOut>
+                </variable>
+              </outputVariables>
+            </block>
+            <block localId="13" typeName="OR" height="30" width="64">
+              <position x="500" y="220" />
+              <inputVariables>
+                <variable formalParameter="IN1">
+                  <connectionPointIn>
+                    <relPosition x="0" y="5" />
+                    <connection refLocalId="11" />
+                  </connectionPointIn>
+                </variable>
+                <variable formalParameter="IN2">
+                  <connectionPointIn>
+                    <relPosition x="0" y="15" />
+                    <connection refLocalId="12" />
+                  </connectionPointIn>
+                </variable>
+              </inputVariables>
+              <inOutVariables />
+              <outputVariables>
+                <variable formalParameter="OUT">
+                  <connectionPointOut>
+                    <relPosition x="64" y="5" />
+                  </connectionPointOut>
+                </variable>
+              </outputVariables>
+            </block>
+            <outVariable localId="14" height="10" width="56">
+              <position x="520" y="250" />
+              <connectionPointIn>
+                <relPosition x="0" y="5" />
+                <connection refLocalId="13" />
+              </connectionPointIn>
+              <expression>Cout</expression>
+            </outVariable>
+          </FBD>
+        </body>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/interfaceasplaintext" handleUnknown="implementation">
+            <InterfaceAsPlainText>
+              <xhtml xmlns="http://www.w3.org/1999/xhtml">FUNCTION_BLOCK FB_FullAdder
+(* Одноразрядный полный сумматор - основа АЛУ.
+	Входы:  A, B - складываемые разряды, Cin - перенос из младшего разряда
+	Выходы: Sum - сумма, Cout - перенос в старший разряд
+	Логика: Sum  := A XOR B XOR Cin
+	        Cout := (A AND B) OR (Cin AND (A XOR B))
+	8 таких блоков, соединённых по переносу, дают 8-разрядный сумматор. *)
+VAR_INPUT
+	A : BOOL; (* разряд A *)
+	B : BOOL; (* разряд B *)
+	Cin : BOOL; (* перенос из младшего разряда *)
+END_VAR
+VAR_OUTPUT
+	Sum : BOOL; (* сумма разряда *)
+	Cout : BOOL; (* перенос в старший разряд *)
+END_VAR
+</xhtml>
+            </InterfaceAsPlainText>
+          </data>
+        </addData>
+      </pou>
+    </pous>
+  </types>
+  <instances>
+    <configurations />
+  </instances>
+</project>

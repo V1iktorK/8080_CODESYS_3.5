@@ -1,0 +1,21 @@
+=== ШАГ 3.1: кастомные FB (регистры, биты, сумматор) ===
+python: 2.7.7 (CODESYS.exe CODESYS V3.5 SP17 Patch 3, ScriptEngine.plugin 4.0.0.0)
+[1] PLCopenXML записан: 74691 символов, POU: FB_Reg8, FB_Reg16, FB_UnpackByte, FB_PackByte, FB_FullAdder
+    projects.create OK -> C:/Users/Ольга/OneDrive/Рабочий стол/CODESYS/8080_EMU/build/EMU8080.project
+    устройство добавлено: type=4096 id=0000 0001 version=3.5.17.30
+    application = Application
+    импортировано по одному файлу: 5 POU
+    СГЕНЕРИРОВАНО : блоков=41 связей=107 пустых.входов=0
+    --- дерево Application после импорта ---
+  - Application [ExtendedObject[IScriptObject]]
+    - Library Manager [ExtendedObject[IScriptObject]]
+    - FB_Reg8 [ExtendedObject[IScriptObject]]
+    - FB_Reg16 [ExtendedObject[IScriptObject]]
+    - FB_UnpackByte [ExtendedObject[IScriptObject]]
+    - FB_PackByte [ExtendedObject[IScriptObject]]
+    - FB_FullAdder [ExtendedObject[IScriptObject]]
+    ПОСЛЕ ИМПОРТА: блоков=41 связей=107 пустых.входов=0
+    ПРОВЕРКА СВЯЗЕЙ: OK (41 блоков, все входы подключены)
+    build() выполнен (сообщения компилятора — в <скрипт>.stdout.txt)
+[3] ИТОГ: УСПЕХ
+=== DONE ===

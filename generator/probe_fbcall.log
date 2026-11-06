@@ -1,0 +1,65 @@
+=== ПРОВЕРКА ВЫЗОВА ПОЛЬЗОВАТЕЛЬСКОГО FB ===
+    projects.create OK -> C:/Users/Ольга/OneDrive/Рабочий стол/CODESYS/8080_EMU/build/probe_fbcall.project
+    устройство добавлено: type=4096 id=0000 0001 version=3.5.17.30
+    application = Application
+    FB_FullAdder импортирован: ЕСТЬ
+    импортировано по одному файлу: 2 POU
+[3] --- ЧТО ДОЕХАЛО ---
+    FB_CALL_V1     ЕСТЬ
+    FB_CALL_V2     ЕСТЬ
+[4] --- ТЕЛО ПОСЛЕ ОБРАТНОЙ ВЫГРУЗКИ ---
+<FBD>
+            <vendorElement localId="10000000000">
+              <position x="0" y="0" />
+              <alternativeText>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml">FBD Implementation Attributes</xhtml>
+              </alternativeText>
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/fbd/implementationattributes" handleUnknown="implementation">
+                  <fbdattributes xmlns="">
+                    <attribute name="BoxInputFlagsSupported" value="true" />
+                  </fbdattributes>
+                </data>
+              </addData>
+            </vendorElement>
+            <inVariable localId="10000000001">
+              <position x="0" y="0" />
+              <connectionPointOut />
+              <expression>A</expression>
+            </inVariable>
+            <inVariable localId="10000000002">
+              <position x="0" y="0" />
+              <connectionPointOut />
+              <expression>B</expression>
+            </inVariable>
+            <inVariable localId="10000000003">
+              <position x="0" y="0" />
+              <connectionPointOut />
+              <expression>FALSE</expression>
+            </inVariable>
+            <block localId="10000000004" typeName="FB_FullAdder" instanceName="fa0">
+              <position x="0" y="0" />
+              <inputVariables>
+                <variable formalParameter="A">
+                  <connectionPointIn>
+                    <connection refLocalId="10000000001" />
+                  </connectionPointIn>
+                </variable>
+                <variable formalParameter="B">
+                  <connectionPointIn>
+                    <connection refLocalId="10000000002" />
+                  </connectionPointIn>
+                </variable>
+                <variable formalParameter="Cin">
+                  <connectionPointIn>
+                    <connection refLocalId="10000000003" />
+                  </connectionPointIn>
+                </variable>
+              </inputVariables>
+              <inOutVariables />
+              <outputVariables>
+                <variable formalParameter="Sum">
+                  <connectionPointOut />
+   
+    build() выполнен (сообщения компилятора — в <скрипт>.stdout.txt)
+=== DONE ===

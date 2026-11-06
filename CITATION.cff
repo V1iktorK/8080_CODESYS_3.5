@@ -1,0 +1,32 @@
+cff-version: 1.2.0
+message: "Если вы используете этот проект, пожалуйста, указывайте авторство как показано ниже."
+title: "Intel 8080 + CP/M 2.2 на FBD в CODESYS 3.5"
+abstract: >-
+  Полный эмулятор процессора Intel 8080, слой операционной системы CP/M 2.2 (BIOS, BDOS, CCP,
+  загрузка и запуск настоящих .COM-программ) и слой промышленного ввода-вывода, реализованные
+  целиком на языке FBD в CODESYS V3.5 SP17 Patch 3. Все POU генерируются из Python в PLCopenXML;
+  один такт 8080 равен одному скану ПЛК. Проверено 218 автотестами (199 ядра + 9 CP/M + 10 I/O),
+  все PASS, компиляция без ошибок и предупреждений.
+authors:
+  - family-names: "Милованов"
+    given-names: "Виктор"
+    alias: "V1iktorK"
+    website: "https://github.com/V1iktorK"
+repository-code: "https://github.com/V1iktorK/8080_CODESYS_3.5"
+url: "https://github.com/V1iktorK/8080_CODESYS_3.5"
+license: CC-BY-4.0
+license-url: "https://creativecommons.org/licenses/by/4.0/"
+keywords:
+  - Intel 8080
+  - CP/M 2.2
+  - CODESYS
+  - IEC 61131-3
+  - FBD
+  - PLC
+  - эмулятор процессора
+  - PLCopenXML
+  - HLE
+  - ретро-вычисления
+type: software
+version: "1.0.0"
+date-released: "2026-11-06"

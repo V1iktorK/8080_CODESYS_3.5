@@ -1,0 +1,828 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project xmlns="http://www.plcopen.org/xml/tc6_0200">
+  <fileHeader companyName="" productName="CODESYS" productVersion="CODESYS V3.5 SP17 Patch 3" creationDateTime="2026-01-01T00:00:00" />
+  <contentHeader name="FB_FlagsReg2">
+    <coordinateInfo>
+      <fbd><scaling x="1" y="1" /></fbd>
+      <ld><scaling x="1" y="1" /></ld>
+      <sfc><scaling x="1" y="1" /></sfc>
+    </coordinateInfo>
+  </contentHeader>
+  <types>
+    <dataTypes />
+    <pous>
+      <pou name="FB_FlagsReg2" pouType="functionBlock">
+        <interface>
+          <inputVars>
+            <variable name="S_In"><type><BOOL /></type></variable>
+            <variable name="Z_In"><type><BOOL /></type></variable>
+            <variable name="AC_In"><type><BOOL /></type></variable>
+            <variable name="P_In"><type><BOOL /></type></variable>
+            <variable name="CY_In"><type><BOOL /></type></variable>
+            <variable name="LD_S"><type><BOOL /></type></variable>
+            <variable name="LD_Z"><type><BOOL /></type></variable>
+            <variable name="LD_AC"><type><BOOL /></type></variable>
+            <variable name="LD_P"><type><BOOL /></type></variable>
+            <variable name="LD_CY"><type><BOOL /></type></variable>
+            <variable name="PSW_In"><type><BYTE /></type></variable>
+            <variable name="LD_PSW"><type><BOOL /></type></variable>
+          </inputVars>
+          <outputVars>
+            <variable name="Sx"><type><BOOL /></type></variable>
+            <variable name="Z"><type><BOOL /></type></variable>
+            <variable name="AC"><type><BOOL /></type></variable>
+            <variable name="P"><type><BOOL /></type></variable>
+            <variable name="CY"><type><BOOL /></type></variable>
+            <variable name="PSW"><type><BYTE /></type></variable>
+          </outputVars>
+          <localVars>
+            <variable name="upsw"><type><derived name="FB_UnpackByte" /></type></variable>
+            <variable name="ppsw"><type><derived name="FB_PackByte" /></type></variable>
+            <variable name="pb0"><type><BOOL /></type></variable>
+            <variable name="pb1"><type><BOOL /></type></variable>
+            <variable name="pb2"><type><BOOL /></type></variable>
+            <variable name="pb3"><type><BOOL /></type></variable>
+            <variable name="pb4"><type><BOOL /></type></variable>
+            <variable name="pb5"><type><BOOL /></type></variable>
+            <variable name="pb6"><type><BOOL /></type></variable>
+            <variable name="pb7"><type><BOOL /></type></variable>
+          </localVars>
+        </interface>
+        <body>
+          <FBD>
+            <!-- СЕТЬ 1. Распаковка PSW_In в отдельные биты -->
+            <inVariable localId="1" height="10" width="74">
+              <position x="40" y="40" />
+              <connectionPointOut><relPosition x="74" y="5" /></connectionPointOut>
+              <expression>PSW_In</expression>
+            </inVariable>
+            <block localId="2" typeName="FB_UnpackByte" instanceName="upsw" height="20" width="136">
+              <position x="200" y="70" />
+              <inputVariables>
+                <variable formalParameter="B">
+                  <connectionPointIn>
+                    <relPosition x="0" y="5" />
+                    <connection refLocalId="1" />
+                  </connectionPointIn>
+                </variable>
+              </inputVariables>
+              <inOutVariables />
+              <outputVariables>
+                <variable formalParameter="B0">
+                  <connectionPointOut>
+                    <relPosition x="136" y="5" />
+                  </connectionPointOut>
+                </variable>
+                <variable formalParameter="B1">
+                  <connectionPointOut>
+                    <relPosition x="136" y="15" />
+                  </connectionPointOut>
+                </variable>
+                <variable formalParameter="B2">
+                  <connectionPointOut>
+                    <relPosition x="136" y="25" />
+                  </connectionPointOut>
+                </variable>
+                <variable formalParameter="B3">
+                  <connectionPointOut>
+                    <relPosition x="136" y="35" />
+                  </connectionPointOut>
+                </variable>
+                <variable formalParameter="B4">
+                  <connectionPointOut>
+                    <relPosition x="136" y="45" />
+                  </connectionPointOut>
+                </variable>
+                <variable formalParameter="B5">
+                  <connectionPointOut>
+                    <relPosition x="136" y="55" />
+                  </connectionPointOut>
+                </variable>
+                <variable formalParameter="B6">
+                  <connectionPointOut>
+                    <relPosition x="136" y="65" />
+                  </connectionPointOut>
+                </variable>
+                <variable formalParameter="B7">
+                  <connectionPointOut>
+                    <relPosition x="136" y="75" />
+                  </connectionPointOut>
+                </variable>
+              </outputVariables>
+            </block>
+            <outVariable localId="3" height="10" width="47">
+              <position x="520" y="100" />
+              <connectionPointIn>
+                <relPosition x="0" y="5" />
+                <connection refLocalId="2" formalParameter="B0" />
+              </connectionPointIn>
+              <expression>pb0</expression>
+            </outVariable>
+            <outVariable localId="4" height="10" width="47">
+              <position x="520" y="130" />
+              <connectionPointIn>
+                <relPosition x="0" y="5" />
+                <connection refLocalId="2" formalParameter="B1" />
+              </connectionPointIn>
+              <expression>pb1</expression>
+            </outVariable>
+            <outVariable localId="5" height="10" width="47">
+              <position x="520" y="160" />
+              <connectionPointIn>
+                <relPosition x="0" y="5" />
+                <connection refLocalId="2" formalParameter="B2" />
+              </connectionPointIn>
+              <expression>pb2</expression>
+            </outVariable>
+            <outVariable localId="6" height="10" width="47">
+              <position x="520" y="190" />
+              <connectionPointIn>
+                <relPosition x="0" y="5" />
+                <connection refLocalId="2" formalParameter="B3" />
+              </connectionPointIn>
+              <expression>pb3</expression>
+            </outVariable>
+            <outVariable localId="7" height="10" width="47">
+              <position x="520" y="220" />
+              <connectionPointIn>
+                <relPosition x="0" y="5" />
+                <connection refLocalId="2" formalParameter="B4" />
+              </connectionPointIn>
+              <expression>pb4</expression>
+            </outVariable>
+            <outVariable localId="8" height="10" width="47">
+              <position x="520" y="250" />
+              <connectionPointIn>
+                <relPosition x="0" y="5" />
+                <connection refLocalId="2" formalParameter="B5" />
+              </connectionPointIn>
+              <expression>pb5</expression>
+            </outVariable>
+            <outVariable localId="9" height="10" width="47">
+              <position x="520" y="280" />
+              <connectionPointIn>
+                <relPosition x="0" y="5" />
+                <connection refLocalId="2" formalParameter="B6" />
+              </connectionPointIn>
+              <expression>pb6</expression>
+            </outVariable>
+            <outVariable localId="10" height="10" width="47">
+              <position x="520" y="310" />
+              <connectionPointIn>
+                <relPosition x="0" y="5" />
+                <connection refLocalId="2" formalParameter="B7" />
+              </connectionPointIn>
+              <expression>pb7</expression>
+            </outVariable>
+            <!-- СЕТЬ 2. Флаг S := LD_PSW ? PSW.бит7 : (LD_S ? S_In : S) -->
+            <inVariable localId="11" height="10" width="56">
+              <position x="40" y="40" />
+              <connectionPointOut><relPosition x="56" y="5" /></connectionPointOut>
+              <expression>LD_S</expression>
+            </inVariable>
+            <inVariable localId="12" height="10" width="29">
+              <position x="40" y="70" />
+              <connectionPointOut><relPosition x="29" y="5" /></connectionPointOut>
+              <expression>Sx</expression>
+            </inVariable>
+            <inVariable localId="13" height="10" width="56">
+              <position x="40" y="100" />
+              <connectionPointOut><relPosition x="56" y="5" /></connectionPointOut>
+              <expression>S_In</expression>
+            </inVariable>
+            <block localId="14" typeName="SEL" height="40" width="76">
+              <position x="200" y="130" />
+              <inputVariables>
+                <variable formalParameter="G">
+                  <connectionPointIn>
+                    <relPosition x="0" y="5" />
+                    <connection refLocalId="11" />
+                  </connectionPointIn>
+                </variable>
+                <variable formalParameter="IN0">
+                  <connectionPointIn>
+                    <relPosition x="0" y="15" />
+                    <connection refLocalId="12" />
+                  </connectionPointIn>
+                </variable>
+                <variable formalParameter="IN1">
+                  <connectionPointIn>
+                    <relPosition x="0" y="25" />
+                    <connection refLocalId="13" />
+                  </connectionPointIn>
+                </variable>
+              </inputVariables>
+              <inOutVariables />
+              <outputVariables>
+                <variable formalParameter="OUT">
+                  <connectionPointOut>
+                    <relPosition x="76" y="5" />
+                  </connectionPointOut>
+                </variable>
+              </outputVariables>
+            </block>
+            <inVariable localId="15" height="10" width="74">
+              <position x="40" y="160" />
+              <connectionPointOut><relPosition x="74" y="5" /></connectionPointOut>
+              <expression>LD_PSW</expression>
+            </inVariable>
+            <inVariable localId="16" height="10" width="47">
+              <position x="40" y="190" />
+              <connectionPointOut><relPosition x="47" y="5" /></connectionPointOut>
+              <expression>pb7</expression>
+            </inVariable>
+            <block localId="17" typeName="SEL" height="40" width="76">
+              <position x="360" y="220" />
+              <inputVariables>
+                <variable formalParameter="G">
+                  <connectionPointIn>
+                    <relPosition x="0" y="5" />
+                    <connection refLocalId="15" />
+                  </connectionPointIn>
+                </variable>
+                <variable formalParameter="IN0">
+                  <connectionPointIn>
+                    <relPosition x="0" y="15" />
+                    <connection refLocalId="14" />
+                  </connectionPointIn>
+                </variable>
+                <variable formalParameter="IN1">
+                  <connectionPointIn>
+                    <relPosition x="0" y="25" />
+                    <connection refLocalId="16" />
+                  </connectionPointIn>
+                </variable>
+              </inputVariables>
+              <inOutVariables />
+              <outputVariables>
+                <variable formalParameter="OUT">
+                  <connectionPointOut>
+                    <relPosition x="76" y="5" />
+                  </connectionPointOut>
+                </variable>
+              </outputVariables>
+            </block>
+            <outVariable localId="18" height="10" width="29">
+              <position x="520" y="250" />
+              <connectionPointIn>
+                <relPosition x="0" y="5" />
+                <connection refLocalId="17" />
+              </connectionPointIn>
+              <expression>Sx</expression>
+            </outVariable>
+            <!-- СЕТЬ 3. Флаг Z := LD_PSW ? PSW.бит6 : (LD_Z ? Z_In : Z) -->
+            <inVariable localId="19" height="10" width="56">
+              <position x="40" y="40" />
+              <connectionPointOut><relPosition x="56" y="5" /></connectionPointOut>
+              <expression>LD_Z</expression>
+            </inVariable>
+            <inVariable localId="20" height="10" width="29">
+              <position x="40" y="70" />
+              <connectionPointOut><relPosition x="29" y="5" /></connectionPointOut>
+              <expression>Z</expression>
+            </inVariable>
+            <inVariable localId="21" height="10" width="56">
+              <position x="40" y="100" />
+              <connectionPointOut><relPosition x="56" y="5" /></connectionPointOut>
+              <expression>Z_In</expression>
+            </inVariable>
+            <block localId="22" typeName="SEL" height="40" width="76">
+              <position x="200" y="130" />
+              <inputVariables>
+                <variable formalParameter="G">
+                  <connectionPointIn>
+                    <relPosition x="0" y="5" />
+                    <connection refLocalId="19" />
+                  </connectionPointIn>
+                </variable>
+                <variable formalParameter="IN0">
+                  <connectionPointIn>
+                    <relPosition x="0" y="15" />
+                    <connection refLocalId="20" />
+                  </connectionPointIn>
+                </variable>
+                <variable formalParameter="IN1">
+                  <connectionPointIn>
+                    <relPosition x="0" y="25" />
+                    <connection refLocalId="21" />
+                  </connectionPointIn>
+                </variable>
+              </inputVariables>
+              <inOutVariables />
+              <outputVariables>
+                <variable formalParameter="OUT">
+                  <connectionPointOut>
+                    <relPosition x="76" y="5" />
+                  </connectionPointOut>
+                </variable>
+              </outputVariables>
+            </block>
+            <inVariable localId="23" height="10" width="74">
+              <position x="40" y="160" />
+              <connectionPointOut><relPosition x="74" y="5" /></connectionPointOut>
+              <expression>LD_PSW</expression>
+            </inVariable>
+            <inVariable localId="24" height="10" width="47">
+              <position x="40" y="190" />
+              <connectionPointOut><relPosition x="47" y="5" /></connectionPointOut>
+              <expression>pb6</expression>
+            </inVariable>
+            <block localId="25" typeName="SEL" height="40" width="76">
+              <position x="360" y="220" />
+              <inputVariables>
+                <variable formalParameter="G">
+                  <connectionPointIn>
+                    <relPosition x="0" y="5" />
+                    <connection refLocalId="23" />
+                  </connectionPointIn>
+                </variable>
+                <variable formalParameter="IN0">
+                  <connectionPointIn>
+                    <relPosition x="0" y="15" />
+                    <connection refLocalId="22" />
+                  </connectionPointIn>
+                </variable>
+                <variable formalParameter="IN1">
+                  <connectionPointIn>
+                    <relPosition x="0" y="25" />
+                    <connection refLocalId="24" />
+                  </connectionPointIn>
+                </variable>
+              </inputVariables>
+              <inOutVariables />
+              <outputVariables>
+                <variable formalParameter="OUT">
+                  <connectionPointOut>
+                    <relPosition x="76" y="5" />
+                  </connectionPointOut>
+                </variable>
+              </outputVariables>
+            </block>
+            <outVariable localId="26" height="10" width="29">
+              <position x="520" y="250" />
+              <connectionPointIn>
+                <relPosition x="0" y="5" />
+                <connection refLocalId="25" />
+              </connectionPointIn>
+              <expression>Z</expression>
+            </outVariable>
+            <!-- СЕТЬ 4. Флаг AC := LD_PSW ? PSW.бит4 : (LD_AC ? AC_In : AC) -->
+            <inVariable localId="27" height="10" width="65">
+              <position x="40" y="40" />
+              <connectionPointOut><relPosition x="65" y="5" /></connectionPointOut>
+              <expression>LD_AC</expression>
+            </inVariable>
+            <inVariable localId="28" height="10" width="38">
+              <position x="40" y="70" />
+              <connectionPointOut><relPosition x="38" y="5" /></connectionPointOut>
+              <expression>AC</expression>
+            </inVariable>
+            <inVariable localId="29" height="10" width="65">
+              <position x="40" y="100" />
+              <connectionPointOut><relPosition x="65" y="5" /></connectionPointOut>
+              <expression>AC_In</expression>
+            </inVariable>
+            <block localId="30" typeName="SEL" height="40" width="76">
+              <position x="200" y="130" />
+              <inputVariables>
+                <variable formalParameter="G">
+                  <connectionPointIn>
+                    <relPosition x="0" y="5" />
+                    <connection refLocalId="27" />
+                  </connectionPointIn>
+                </variable>
+                <variable formalParameter="IN0">
+                  <connectionPointIn>
+                    <relPosition x="0" y="15" />
+                    <connection refLocalId="28" />
+                  </connectionPointIn>
+                </variable>
+                <variable formalParameter="IN1">
+                  <connectionPointIn>
+                    <relPosition x="0" y="25" />
+                    <connection refLocalId="29" />
+                  </connectionPointIn>
+                </variable>
+              </inputVariables>
+              <inOutVariables />
+              <outputVariables>
+                <variable formalParameter="OUT">
+                  <connectionPointOut>
+                    <relPosition x="76" y="5" />
+                  </connectionPointOut>
+                </variable>
+              </outputVariables>
+            </block>
+            <inVariable localId="31" height="10" width="74">
+              <position x="40" y="160" />
+              <connectionPointOut><relPosition x="74" y="5" /></connectionPointOut>
+              <expression>LD_PSW</expression>
+            </inVariable>
+            <inVariable localId="32" height="10" width="47">
+              <position x="40" y="190" />
+              <connectionPointOut><relPosition x="47" y="5" /></connectionPointOut>
+              <expression>pb4</expression>
+            </inVariable>
+            <block localId="33" typeName="SEL" height="40" width="76">
+              <position x="360" y="220" />
+              <inputVariables>
+                <variable formalParameter="G">
+                  <connectionPointIn>
+                    <relPosition x="0" y="5" />
+                    <connection refLocalId="31" />
+                  </connectionPointIn>
+                </variable>
+                <variable formalParameter="IN0">
+                  <connectionPointIn>
+                    <relPosition x="0" y="15" />
+                    <connection refLocalId="30" />
+                  </connectionPointIn>
+                </variable>
+                <variable formalParameter="IN1">
+                  <connectionPointIn>
+                    <relPosition x="0" y="25" />
+                    <connection refLocalId="32" />
+                  </connectionPointIn>
+                </variable>
+              </inputVariables>
+              <inOutVariables />
+              <outputVariables>
+                <variable formalParameter="OUT">
+                  <connectionPointOut>
+                    <relPosition x="76" y="5" />
+                  </connectionPointOut>
+                </variable>
+              </outputVariables>
+            </block>
+            <outVariable localId="34" height="10" width="38">
+              <position x="520" y="250" />
+              <connectionPointIn>
+                <relPosition x="0" y="5" />
+                <connection refLocalId="33" />
+              </connectionPointIn>
+              <expression>AC</expression>
+            </outVariable>
+            <!-- СЕТЬ 5. Флаг P := LD_PSW ? PSW.бит2 : (LD_P ? P_In : P) -->
+            <inVariable localId="35" height="10" width="56">
+              <position x="40" y="40" />
+              <connectionPointOut><relPosition x="56" y="5" /></connectionPointOut>
+              <expression>LD_P</expression>
+            </inVariable>
+            <inVariable localId="36" height="10" width="29">
+              <position x="40" y="70" />
+              <connectionPointOut><relPosition x="29" y="5" /></connectionPointOut>
+              <expression>P</expression>
+            </inVariable>
+            <inVariable localId="37" height="10" width="56">
+              <position x="40" y="100" />
+              <connectionPointOut><relPosition x="56" y="5" /></connectionPointOut>
+              <expression>P_In</expression>
+            </inVariable>
+            <block localId="38" typeName="SEL" height="40" width="76">
+              <position x="200" y="130" />
+              <inputVariables>
+                <variable formalParameter="G">
+                  <connectionPointIn>
+                    <relPosition x="0" y="5" />
+                    <connection refLocalId="35" />
+                  </connectionPointIn>
+                </variable>
+                <variable formalParameter="IN0">
+                  <connectionPointIn>
+                    <relPosition x="0" y="15" />
+                    <connection refLocalId="36" />
+                  </connectionPointIn>
+                </variable>
+                <variable formalParameter="IN1">
+                  <connectionPointIn>
+                    <relPosition x="0" y="25" />
+                    <connection refLocalId="37" />
+                  </connectionPointIn>
+                </variable>
+              </inputVariables>
+              <inOutVariables />
+              <outputVariables>
+                <variable formalParameter="OUT">
+                  <connectionPointOut>
+                    <relPosition x="76" y="5" />
+                  </connectionPointOut>
+                </variable>
+              </outputVariables>
+            </block>
+            <inVariable localId="39" height="10" width="74">
+              <position x="40" y="160" />
+              <connectionPointOut><relPosition x="74" y="5" /></connectionPointOut>
+              <expression>LD_PSW</expression>
+            </inVariable>
+            <inVariable localId="40" height="10" width="47">
+              <position x="40" y="190" />
+              <connectionPointOut><relPosition x="47" y="5" /></connectionPointOut>
+              <expression>pb2</expression>
+            </inVariable>
+            <block localId="41" typeName="SEL" height="40" width="76">
+              <position x="360" y="220" />
+              <inputVariables>
+                <variable formalParameter="G">
+                  <connectionPointIn>
+                    <relPosition x="0" y="5" />
+                    <connection refLocalId="39" />
+                  </connectionPointIn>
+                </variable>
+                <variable formalParameter="IN0">
+                  <connectionPointIn>
+                    <relPosition x="0" y="15" />
+                    <connection refLocalId="38" />
+                  </connectionPointIn>
+                </variable>
+                <variable formalParameter="IN1">
+                  <connectionPointIn>
+                    <relPosition x="0" y="25" />
+                    <connection refLocalId="40" />
+                  </connectionPointIn>
+                </variable>
+              </inputVariables>
+              <inOutVariables />
+              <outputVariables>
+                <variable formalParameter="OUT">
+                  <connectionPointOut>
+                    <relPosition x="76" y="5" />
+                  </connectionPointOut>
+                </variable>
+              </outputVariables>
+            </block>
+            <outVariable localId="42" height="10" width="29">
+              <position x="520" y="250" />
+              <connectionPointIn>
+                <relPosition x="0" y="5" />
+                <connection refLocalId="41" />
+              </connectionPointIn>
+              <expression>P</expression>
+            </outVariable>
+            <!-- СЕТЬ 6. Флаг CY := LD_PSW ? PSW.бит0 : (LD_CY ? CY_In : CY) -->
+            <inVariable localId="43" height="10" width="65">
+              <position x="40" y="40" />
+              <connectionPointOut><relPosition x="65" y="5" /></connectionPointOut>
+              <expression>LD_CY</expression>
+            </inVariable>
+            <inVariable localId="44" height="10" width="38">
+              <position x="40" y="70" />
+              <connectionPointOut><relPosition x="38" y="5" /></connectionPointOut>
+              <expression>CY</expression>
+            </inVariable>
+            <inVariable localId="45" height="10" width="65">
+              <position x="40" y="100" />
+              <connectionPointOut><relPosition x="65" y="5" /></connectionPointOut>
+              <expression>CY_In</expression>
+            </inVariable>
+            <block localId="46" typeName="SEL" height="40" width="76">
+              <position x="200" y="130" />
+              <inputVariables>
+                <variable formalParameter="G">
+                  <connectionPointIn>
+                    <relPosition x="0" y="5" />
+                    <connection refLocalId="43" />
+                  </connectionPointIn>
+                </variable>
+                <variable formalParameter="IN0">
+                  <connectionPointIn>
+                    <relPosition x="0" y="15" />
+                    <connection refLocalId="44" />
+                  </connectionPointIn>
+                </variable>
+                <variable formalParameter="IN1">
+                  <connectionPointIn>
+                    <relPosition x="0" y="25" />
+                    <connection refLocalId="45" />
+                  </connectionPointIn>
+                </variable>
+              </inputVariables>
+              <inOutVariables />
+              <outputVariables>
+                <variable formalParameter="OUT">
+                  <connectionPointOut>
+                    <relPosition x="76" y="5" />
+                  </connectionPointOut>
+                </variable>
+              </outputVariables>
+            </block>
+            <inVariable localId="47" height="10" width="74">
+              <position x="40" y="160" />
+              <connectionPointOut><relPosition x="74" y="5" /></connectionPointOut>
+              <expression>LD_PSW</expression>
+            </inVariable>
+            <inVariable localId="48" height="10" width="47">
+              <position x="40" y="190" />
+              <connectionPointOut><relPosition x="47" y="5" /></connectionPointOut>
+              <expression>pb0</expression>
+            </inVariable>
+            <block localId="49" typeName="SEL" height="40" width="76">
+              <position x="360" y="220" />
+              <inputVariables>
+                <variable formalParameter="G">
+                  <connectionPointIn>
+                    <relPosition x="0" y="5" />
+                    <connection refLocalId="47" />
+                  </connectionPointIn>
+                </variable>
+                <variable formalParameter="IN0">
+                  <connectionPointIn>
+                    <relPosition x="0" y="15" />
+                    <connection refLocalId="46" />
+                  </connectionPointIn>
+                </variable>
+                <variable formalParameter="IN1">
+                  <connectionPointIn>
+                    <relPosition x="0" y="25" />
+                    <connection refLocalId="48" />
+                  </connectionPointIn>
+                </variable>
+              </inputVariables>
+              <inOutVariables />
+              <outputVariables>
+                <variable formalParameter="OUT">
+                  <connectionPointOut>
+                    <relPosition x="76" y="5" />
+                  </connectionPointOut>
+                </variable>
+              </outputVariables>
+            </block>
+            <outVariable localId="50" height="10" width="38">
+              <position x="520" y="250" />
+              <connectionPointIn>
+                <relPosition x="0" y="5" />
+                <connection refLocalId="49" />
+              </connectionPointIn>
+              <expression>CY</expression>
+            </outVariable>
+            <!-- СЕТЬ 7. Упаковка PSW: 7=S 6=Z 5=0 4=AC 3=0 2=P 1=1 0=CY -->
+            <inVariable localId="51" height="10" width="38">
+              <position x="40" y="40" />
+              <connectionPointOut><relPosition x="38" y="5" /></connectionPointOut>
+              <expression>CY</expression>
+            </inVariable>
+            <inVariable localId="52" height="10" width="56">
+              <position x="40" y="70" />
+              <connectionPointOut><relPosition x="56" y="5" /></connectionPointOut>
+              <expression>TRUE</expression>
+            </inVariable>
+            <inVariable localId="53" height="10" width="29">
+              <position x="40" y="100" />
+              <connectionPointOut><relPosition x="29" y="5" /></connectionPointOut>
+              <expression>P</expression>
+            </inVariable>
+            <inVariable localId="54" height="10" width="65">
+              <position x="40" y="130" />
+              <connectionPointOut><relPosition x="65" y="5" /></connectionPointOut>
+              <expression>FALSE</expression>
+            </inVariable>
+            <inVariable localId="55" height="10" width="38">
+              <position x="40" y="160" />
+              <connectionPointOut><relPosition x="38" y="5" /></connectionPointOut>
+              <expression>AC</expression>
+            </inVariable>
+            <inVariable localId="56" height="10" width="65">
+              <position x="40" y="190" />
+              <connectionPointOut><relPosition x="65" y="5" /></connectionPointOut>
+              <expression>FALSE</expression>
+            </inVariable>
+            <inVariable localId="57" height="10" width="29">
+              <position x="40" y="220" />
+              <connectionPointOut><relPosition x="29" y="5" /></connectionPointOut>
+              <expression>Z</expression>
+            </inVariable>
+            <inVariable localId="58" height="10" width="29">
+              <position x="40" y="250" />
+              <connectionPointOut><relPosition x="29" y="5" /></connectionPointOut>
+              <expression>Sx</expression>
+            </inVariable>
+            <block localId="59" typeName="FB_PackByte" instanceName="ppsw" height="90" width="136">
+              <position x="200" y="280" />
+              <inputVariables>
+                <variable formalParameter="B0">
+                  <connectionPointIn>
+                    <relPosition x="0" y="5" />
+                    <connection refLocalId="51" />
+                  </connectionPointIn>
+                </variable>
+                <variable formalParameter="B1">
+                  <connectionPointIn>
+                    <relPosition x="0" y="15" />
+                    <connection refLocalId="52" />
+                  </connectionPointIn>
+                </variable>
+                <variable formalParameter="B2">
+                  <connectionPointIn>
+                    <relPosition x="0" y="25" />
+                    <connection refLocalId="53" />
+                  </connectionPointIn>
+                </variable>
+                <variable formalParameter="B3">
+                  <connectionPointIn>
+                    <relPosition x="0" y="35" />
+                    <connection refLocalId="54" />
+                  </connectionPointIn>
+                </variable>
+                <variable formalParameter="B4">
+                  <connectionPointIn>
+                    <relPosition x="0" y="45" />
+                    <connection refLocalId="55" />
+                  </connectionPointIn>
+                </variable>
+                <variable formalParameter="B5">
+                  <connectionPointIn>
+                    <relPosition x="0" y="55" />
+                    <connection refLocalId="56" />
+                  </connectionPointIn>
+                </variable>
+                <variable formalParameter="B6">
+                  <connectionPointIn>
+                    <relPosition x="0" y="65" />
+                    <connection refLocalId="57" />
+                  </connectionPointIn>
+                </variable>
+                <variable formalParameter="B7">
+                  <connectionPointIn>
+                    <relPosition x="0" y="75" />
+                    <connection refLocalId="58" />
+                  </connectionPointIn>
+                </variable>
+              </inputVariables>
+              <inOutVariables />
+              <outputVariables>
+                <variable formalParameter="B">
+                  <connectionPointOut>
+                    <relPosition x="136" y="5" />
+                  </connectionPointOut>
+                </variable>
+              </outputVariables>
+            </block>
+            <outVariable localId="60" height="10" width="47">
+              <position x="520" y="310" />
+              <connectionPointIn>
+                <relPosition x="0" y="5" />
+                <connection refLocalId="59" />
+              </connectionPointIn>
+              <expression>PSW</expression>
+            </outVariable>
+          </FBD>
+        </body>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/interfaceasplaintext" handleUnknown="implementation">
+            <InterfaceAsPlainText>
+              <xhtml xmlns="http://www.w3.org/1999/xhtml">FUNCTION_BLOCK FB_FlagsReg2
+(* Регистр флагов с раздельной записью по каждому флагу.
+	В 8080 флаги обновляются по-разному:
+	  ADD/ADC/SUB/SBB/ANA/ORA/XRA/CMP и ADI..CPI - S, Z, AC, P, CY;
+	  INR/DCR                                        - S, Z, AC, P (БЕЗ CY);
+	  DAD, RLC/RRC/RAL/RAR, STC/CMC                  - ТОЛЬКО CY;
+	  CMA                                            - ни один флаг;
+	  DAA                                            - S, Z, AC, P, CY.
+	Поэтому у каждого флага свой вход разрешения LD_S..LD_CY.
+	LD_PSW (POP PSW) имеет приоритет над LD_*: флаги берутся из битов
+	входного байта PSW_In, где 7=S 6=Z 4=AC 2=P 0=CY.
+	Выход PSW - упакованный байт состояния (бит 1 всегда 1). *)
+VAR_INPUT
+	S_In : BOOL; (* новый флаг знака *)
+	Z_In : BOOL; (* новый флаг нуля *)
+	AC_In : BOOL; (* новый флаг дополнительного переноса *)
+	P_In : BOOL; (* новый флаг чётности *)
+	CY_In : BOOL; (* новый флаг переноса *)
+	LD_S : BOOL; (* записать S *)
+	LD_Z : BOOL; (* записать Z *)
+	LD_AC : BOOL; (* записать AC *)
+	LD_P : BOOL; (* записать P *)
+	LD_CY : BOOL; (* записать CY *)
+	PSW_In : BYTE; (* байт состояния для POP PSW *)
+	LD_PSW : BOOL; (* загрузить все флаги из PSW_In *)
+END_VAR
+VAR_OUTPUT
+	Sx : BOOL; (* знак *)
+	Z : BOOL; (* ноль *)
+	AC : BOOL; (* дополнительный перенос *)
+	P : BOOL; (* чётность *)
+	CY : BOOL; (* перенос *)
+	PSW : BYTE; (* упакованный байт состояния *)
+END_VAR
+VAR
+	upsw : FB_UnpackByte; (* распаковка PSW_In *)
+	ppsw : FB_PackByte; (* упаковка PSW *)
+	pb0 : BOOL; (* защёлкнутый бит 0 байта PSW_In *)
+	pb1 : BOOL; (* защёлкнутый бит 1 байта PSW_In *)
+	pb2 : BOOL; (* защёлкнутый бит 2 байта PSW_In *)
+	pb3 : BOOL; (* защёлкнутый бит 3 байта PSW_In *)
+	pb4 : BOOL; (* защёлкнутый бит 4 байта PSW_In *)
+	pb5 : BOOL; (* защёлкнутый бит 5 байта PSW_In *)
+	pb6 : BOOL; (* защёлкнутый бит 6 байта PSW_In *)
+	pb7 : BOOL; (* защёлкнутый бит 7 байта PSW_In *)
+END_VAR
+</xhtml>
+            </InterfaceAsPlainText>
+          </data>
+        </addData>
+      </pou>
+    </pous>
+  </types>
+  <instances>
+    <configurations />
+  </instances>
+</project>

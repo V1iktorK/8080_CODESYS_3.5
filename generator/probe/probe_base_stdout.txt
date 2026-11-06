@@ -1,0 +1,3 @@
+SCR=[C:\Users\Ольга\OneDrive\Рабочий стол\CODESYS\8080_EMU\generator\probe\probe_base.py] 
+SCRIPT EXISTS 
+[exit=0] 

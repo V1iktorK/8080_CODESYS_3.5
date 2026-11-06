@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project xmlns="http://www.plcopen.org/xml/tc6_0200">
+  <fileHeader companyName="" productName="CODESYS" productVersion="CODESYS V3.5 SP17 Patch 3" creationDateTime="2026-01-01T00:00:00" />
+  <contentHeader name="FB_DecodeFull_HLT">
+    <coordinateInfo>
+      <fbd><scaling x="1" y="1" /></fbd>
+      <ld><scaling x="1" y="1" /></ld>
+      <sfc><scaling x="1" y="1" /></sfc>
+    </coordinateInfo>
+  </contentHeader>
+  <types>
+    <dataTypes />
+    <pous>
+      <pou name="FB_DecodeFull_HLT" pouType="functionBlock">
+        <interface>
+          <inputVars>
+            <variable name="IR"><type><BYTE /></type></variable>
+          </inputVars>
+          <outputVars>
+            <variable name="Hit"><type><BOOL /></type></variable>
+            <variable name="Cls"><type><BYTE /></type></variable>
+          </outputVars>
+        </interface>
+        <body>
+          <FBD>
+            <!-- СЕТЬ 1. Hit := IR = 76h ; Cls := 32 -->
+            <inVariable localId="1" height="10" width="38">
+              <position x="40" y="40" />
+              <connectionPointOut><relPosition x="38" y="5" /></connectionPointOut>
+              <expression>IR</expression>
+            </inVariable>
+            <inVariable localId="2" height="10" width="110">
+              <position x="40" y="70" />
+              <connectionPointOut><relPosition x="110" y="5" /></connectionPointOut>
+              <expression>BYTE#16#76</expression>
+            </inVariable>
+            <block localId="3" typeName="EQ" height="30" width="64">
+              <position x="200" y="100" />
+              <inputVariables>
+                <variable formalParameter="IN1">
+                  <connectionPointIn>
+                    <relPosition x="0" y="5" />
+                    <connection refLocalId="1" />
+                  </connectionPointIn>
+                </variable>
+                <variable formalParameter="IN2">
+                  <connectionPointIn>
+                    <relPosition x="0" y="15" />
+                    <connection refLocalId="2" />
+                  </connectionPointIn>
+                </variable>
+              </inputVariables>
+              <inOutVariables />
+              <outputVariables>
+                <variable formalParameter="OUT">
+                  <connectionPointOut>
+                    <relPosition x="64" y="5" />
+                  </connectionPointOut>
+                </variable>
+              </outputVariables>
+            </block>
+            <outVariable localId="4" height="10" width="47">
+              <position x="520" y="130" />
+              <connectionPointIn>
+                <relPosition x="0" y="5" />
+                <connection refLocalId="3" />
+              </connectionPointIn>
+              <expression>Hit</expression>
+            </outVariable>
+            <inVariable localId="5" height="10" width="83">
+              <position x="40" y="160" />
+              <connectionPointOut><relPosition x="83" y="5" /></connectionPointOut>
+              <expression>BYTE#32</expression>
+            </inVariable>
+            <outVariable localId="6" height="10" width="47">
+              <position x="520" y="190" />
+              <connectionPointIn>
+                <relPosition x="0" y="5" />
+                <connection refLocalId="5" />
+              </connectionPointIn>
+              <expression>Cls</expression>
+            </outVariable>
+          </FBD>
+        </body>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/interfaceasplaintext" handleUnknown="implementation">
+            <InterfaceAsPlainText>
+              <xhtml xmlns="http://www.w3.org/1999/xhtml">FUNCTION_BLOCK FB_DecodeFull_HLT
+(* Распознавание HLT (0111 0110 = 76h). Класс операции 32 = HLT.
+	Останов: PC и регистры перестают меняться, такты не выполняются. *)
+VAR_INPUT
+	IR : BYTE; (* регистр команды *)
+END_VAR
+VAR_OUTPUT
+	Hit : BOOL; (* это HLT *)
+	Cls : BYTE; (* класс операции C_Class = 32 (HLT) *)
+END_VAR
+</xhtml>
+            </InterfaceAsPlainText>
+          </data>
+        </addData>
+      </pou>
+    </pous>
+  </types>
+  <instances>
+    <configurations />
+  </instances>
+</project>

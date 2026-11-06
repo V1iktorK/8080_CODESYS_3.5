@@ -1,0 +1,36 @@
+=== БИСЕКЦИЯ ОПЕРАТОРОВ FBD ===
+[1] сгенерировано POU: 12
+    projects.create OK -> C:/Users/Ольга/OneDrive/Рабочий стол/CODESYS/8080_EMU/build/probe_ops.project
+    устройство добавлено: type=4096 id=0000 0001 version=3.5.17.30
+    application = Application
+    импортировано по одному файлу: 12 POU
+[3] --- ЧТО ДОЕХАЛО ---
+    T_BOOL_AND     ЕСТЬ
+    T_BOOL_OR      ЕСТЬ
+    T_BOOL_XOR     ЕСТЬ
+    T_BOOL_NOT     ЕСТЬ
+    T_BYTE_ADD     ЕСТЬ
+    T_BYTE_AND     ЕСТЬ
+    T_BYTE_OR      ЕСТЬ
+    T_SEL          ЕСТЬ
+    T_MOVE         ЕСТЬ
+    T_ASSIGN       ЕСТЬ
+    T_TWO_OUT      ЕСТЬ
+    T_TWO_SEL      ЕСТЬ
+    build() выполнен (сообщения компилятора — в <скрипт>.stdout.txt)
+[4] дерево:
+  - Application [ExtendedObject[IScriptObject]]
+    - Library Manager [ExtendedObject[IScriptObject]]
+    - T_BOOL_AND [ExtendedObject[IScriptObject]]
+    - T_BOOL_OR [ExtendedObject[IScriptObject]]
+    - T_BOOL_XOR [ExtendedObject[IScriptObject]]
+    - T_BOOL_NOT [ExtendedObject[IScriptObject]]
+    - T_BYTE_ADD [ExtendedObject[IScriptObject]]
+    - T_BYTE_AND [ExtendedObject[IScriptObject]]
+    - T_BYTE_OR [ExtendedObject[IScriptObject]]
+    - T_SEL [ExtendedObject[IScriptObject]]
+    - T_MOVE [ExtendedObject[IScriptObject]]
+    - T_ASSIGN [ExtendedObject[IScriptObject]]
+    - T_TWO_OUT [ExtendedObject[IScriptObject]]
+    - T_TWO_SEL [ExtendedObject[IScriptObject]]
+=== DONE ===

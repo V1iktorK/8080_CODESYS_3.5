@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project xmlns="http://www.plcopen.org/xml/tc6_0200">
+  <fileHeader companyName="" productName="CODESYS" productVersion="CODESYS V3.5 SP17 Patch 3" creationDateTime="2026-01-01T00:00:00" />
+  <contentHeader name="FB_Interrupt">
+    <coordinateInfo>
+      <fbd><scaling x="1" y="1" /></fbd>
+      <ld><scaling x="1" y="1" /></ld>
+      <sfc><scaling x="1" y="1" /></sfc>
+    </coordinateInfo>
+  </contentHeader>
+  <types>
+    <dataTypes />
+    <pous>
+      <pou name="FB_Interrupt" pouType="functionBlock">
+        <interface>
+          <inputVars>
+            <variable name="INT_Req"><type><BOOL /></type></variable>
+            <variable name="IFF"><type><BOOL /></type></variable>
+            <variable name="Busy"><type><BOOL /></type></variable>
+            <variable name="INT_Vector"><type><BYTE /></type></variable>
+            <variable name="PC"><type><WORD /></type></variable>
+            <variable name="SP"><type><WORD /></type></variable>
+          </inputVars>
+          <outputVars>
+            <variable name="Take"><type><BOOL /></type></variable>
+            <variable name="PC_Vec"><type><WORD /></type></variable>
+            <variable name="SP_New"><type><WORD /></type></variable>
+            <variable name="Push_Needed"><type><BOOL /></type></variable>
+          </outputVars>
+          <localVars>
+            <variable name="vec_w"><type><WORD /></type></variable>
+          </localVars>
+        </interface>
+        <body>
+          <FBD>
+            <!-- СЕТЬ 1. Take := INT_Req AND IFF AND NOT Busy -->
+            <inVariable localId="1" height="10" width="83">
+              <position x="40" y="40" />
+              <connectionPointOut><relPosition x="83" y="5" /></connectionPointOut>
+              <expression>INT_Req</expression>
+            </inVariable>
+            <inVariable localId="2" height="10" width="47">
+              <position x="40" y="70" />
+              <connectionPointOut><relPosition x="47" y="5" /></connectionPointOut>
+              <expression>IFF</expression>
+            </inVariable>
+            <inVariable localId="3" height="10" width="56">
+              <position x="40" y="100" />
+              <connectionPointOut><relPosition x="56" y="5" /></connectionPointOut>
+              <expression>Busy</expression>
+            </inVariable>
+            <block localId="4" typeName="NOT" height="20" width="52">
+              <position x="200" y="130" />
+              <inputVariables>
+                <variable formalParameter="IN">
+                  <connectionPointIn>
+                    <relPosition x="0" y="5" />
+                    <connection refLocalId="3" />
+                  </connectionPointIn>
+                </variable>
+              </inputVariables>
+              <inOutVariables />
+              <outputVariables>
+                <variable formalParameter="OUT">
+                  <connectionPointOut>
+                    <relPosition x="52" y="5" />
+                  </connectionPointOut>
+                </variable>
+              </outputVariables>
+            </block>
+            <block localId="5" typeName="AND" height="30" width="64">
+              <position x="200" y="160" />
+              <inputVariables>
+                <variable formalParameter="IN1">
+                  <connectionPointIn>
+                    <relPosition x="0" y="5" />
+                    <connection refLocalId="1" />
+                  </connectionPointIn>
+                </variable>
+                <variable formalParameter="IN2">
+                  <connectionPointIn>
+                    <relPosition x="0" y="15" />
+                    <connection refLocalId="2" />
+                  </connectionPointIn>
+                </variable>
+              </inputVariables>
+              <inOutVariables />
+              <outputVariables>
+                <variable formalParameter="OUT">
+                  <connectionPointOut>
+                    <relPosition x="64" y="5" />
+                  </connectionPointOut>
+                </variable>
+              </outputVariables>
+            </block>
+            <block localId="6" typeName="AND" height="30" width="64">
+              <position x="360" y="190" />
+              <inputVariables>
+                <variable formalParameter="IN1">
+                  <connectionPointIn>
+                    <relPosition x="0" y="5" />
+                    <connection refLocalId="5" />
+                  </connectionPointIn>
+                </variable>
+                <variable formalParameter="IN2">
+                  <connectionPointIn>
+                    <relPosition x="0" y="15" />
+                    <connection refLocalId="4" />
+                  </connectionPointIn>
+                </variable>
+              </inputVariables>
+              <inOutVariables />
+              <outputVariables>
+                <variable formalParameter="OUT">
+                  <connectionPointOut>
+                    <relPosition x="64" y="5" />
+                  </connectionPointOut>
+                </variable>
+              </outputVariables>
+            </block>
+            <outVariable localId="7" height="10" width="56">
+              <position x="520" y="220" />
+              <connectionPointIn>
+                <relPosition x="0" y="5" />
+                <connection refLocalId="6" />
+              </connectionPointIn>
+              <expression>Take</expression>
+            </outVariable>
+            <inVariable localId="8" height="10" width="56">
+              <position x="40" y="250" />
+              <connectionPointOut><relPosition x="56" y="5" /></connectionPointOut>
+              <expression>Take</expression>
+            </inVariable>
+            <outVariable localId="9" height="10" width="119">
+              <position x="520" y="280" />
+              <connectionPointIn>
+                <relPosition x="0" y="5" />
+                <connection refLocalId="8" />
+              </connectionPointIn>
+              <expression>Push_Needed</expression>
+            </outVariable>
+            <!-- СЕТЬ 2. Адрес обработчика: вектор * 8 (байт сначала в WORD) -->
+            <inVariable localId="10" height="10" width="110">
+              <position x="40" y="40" />
+              <connectionPointOut><relPosition x="110" y="5" /></connectionPointOut>
+              <expression>INT_Vector</expression>
+            </inVariable>
+            <outVariable localId="11" height="10" width="65">
+              <position x="520" y="70" />
+              <connectionPointIn>
+                <relPosition x="0" y="5" />
+                <connection refLocalId="10" />
+              </connectionPointIn>
+              <expression>vec_w</expression>
+            </outVariable>
+            <inVariable localId="12" height="10" width="65">
+              <position x="40" y="100" />
+              <connectionPointOut><relPosition x="65" y="5" /></connectionPointOut>
+              <expression>vec_w</expression>
+            </inVariable>
+            <inVariable localId="13" height="10" width="74">
+              <position x="40" y="130" />
+              <connectionPointOut><relPosition x="74" y="5" /></connectionPointOut>
+              <expression>WORD#3</expression>
+            </inVariable>
+            <block localId="14" typeName="SHL" height="30" width="64">
+              <position x="200" y="160" />
+              <inputVariables>
+                <variable formalParameter="IN1">
+                  <connectionPointIn>
+                    <relPosition x="0" y="5" />
+                    <connection refLocalId="12" />
+                  </connectionPointIn>
+                </variable>
+                <variable formalParameter="IN2">
+                  <connectionPointIn>
+                    <relPosition x="0" y="15" />
+                    <connection refLocalId="13" />
+                  </connectionPointIn>
+                </variable>
+              </inputVariables>
+              <inOutVariables />
+              <outputVariables>
+                <variable formalParameter="OUT">
+                  <connectionPointOut>
+                    <relPosition x="64" y="5" />
+                  </connectionPointOut>
+                </variable>
+              </outputVariables>
+            </block>
+            <outVariable localId="15" height="10" width="74">
+              <position x="520" y="190" />
+              <connectionPointIn>
+                <relPosition x="0" y="5" />
+                <connection refLocalId="14" />
+              </connectionPointIn>
+              <expression>PC_Vec</expression>
+            </outVariable>
+            <!-- СЕТЬ 3. Указатель стека: SP - 2 -->
+            <inVariable localId="16" height="10" width="38">
+              <position x="40" y="40" />
+              <connectionPointOut><relPosition x="38" y="5" /></connectionPointOut>
+              <expression>SP</expression>
+            </inVariable>
+            <inVariable localId="17" height="10" width="74">
+              <position x="40" y="70" />
+              <connectionPointOut><relPosition x="74" y="5" /></connectionPointOut>
+              <expression>WORD#2</expression>
+            </inVariable>
+            <block localId="18" typeName="SUB" height="30" width="64">
+              <position x="200" y="100" />
+              <inputVariables>
+                <variable formalParameter="IN1">
+                  <connectionPointIn>
+                    <relPosition x="0" y="5" />
+                    <connection refLocalId="16" />
+                  </connectionPointIn>
+                </variable>
+                <variable formalParameter="IN2">
+                  <connectionPointIn>
+                    <relPosition x="0" y="15" />
+                    <connection refLocalId="17" />
+                  </connectionPointIn>
+                </variable>
+              </inputVariables>
+              <inOutVariables />
+              <outputVariables>
+                <variable formalParameter="OUT">
+                  <connectionPointOut>
+                    <relPosition x="64" y="5" />
+                  </connectionPointOut>
+                </variable>
+              </outputVariables>
+            </block>
+            <outVariable localId="19" height="10" width="74">
+              <position x="520" y="130" />
+              <connectionPointIn>
+                <relPosition x="0" y="5" />
+                <connection refLocalId="18" />
+              </connectionPointIn>
+              <expression>SP_New</expression>
+            </outVariable>
+          </FBD>
+        </body>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/interfaceasplaintext" handleUnknown="implementation">
+            <InterfaceAsPlainText>
+              <xhtml xmlns="http://www.w3.org/1999/xhtml">FUNCTION_BLOCK FB_Interrupt
+(* Приём запроса прерывания (вход INT процессора).
+	Прерывание принимается, если: INT_Req = 1, IFF = 1 (прерывания
+	разрешены командой EI и запрещены DI) и Busy = 0 (предыдущее
+	прерывание уже отработано). Приоритет внутри такта абсолютный:
+	выборка и выполнение очередной команды заменяются переходом
+	на обработчик.
+	При приёме: PC &lt;- INT_Vector * 8, SP &lt;- SP - 2 (в стек по SP-1 и
+	SP-2 процессор кладёт текущий PC), IFF &lt;- 0, Busy &lt;- 1.
+	Команда RET при Busy = 1 снимает Busy и снова ставит IFF = 1 -
+	так же, как в реальном 8080 (RET восстанавливает разрешение).
+	Выходы: Take - прерывание принято, PC_Vec - адрес обработчика,
+	        SP_New - новый указатель стека, Push_Needed - надо
+	        положить PC в стек (совпадает с Take, отдельным
+	        выходом - чтобы схема читалась как микрооперации). *)
+VAR_INPUT
+	INT_Req : BOOL; (* запрос прерывания *)
+	IFF : BOOL; (* разрешение прерываний (триггер IFF) *)
+	Busy : BOOL; (* прерывание уже обслуживается *)
+	INT_Vector : BYTE; (* номер вектора 0..7 *)
+	PC : WORD; (* текущий счётчик команд (кладётся в стек) *)
+	SP : WORD; (* текущий указатель стека *)
+END_VAR
+VAR_OUTPUT
+	Take : BOOL; (* прерывание принято *)
+	PC_Vec : WORD; (* адрес обработчика = вектор * 8 *)
+	SP_New : WORD; (* указатель стека после сохранения PC *)
+	Push_Needed : BOOL; (* нужно положить PC в стек *)
+END_VAR
+VAR
+	vec_w : WORD; (* вектор, расширенный до слова (см. журнал 10.1) *)
+END_VAR
+</xhtml>
+            </InterfaceAsPlainText>
+          </data>
+        </addData>
+      </pou>
+    </pous>
+  </types>
+  <instances>
+    <configurations />
+  </instances>
+</project>

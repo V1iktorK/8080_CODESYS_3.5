@@ -1,0 +1,22 @@
+[0] скрипт запущен, python 2.7.7 (CODESYS.exe CODESYS V3.5 SP17 Patch 3, ScriptEngine.plugin 4.0.0.0)
+[0] BASE=C:/Users/Ольга/OneDrive/Рабочий стол/CODESYS/8080_EMU/generator ROOT=C:/Users/Ольга/OneDrive/Рабочий стол/CODESYS/8080_EMU
+[1] PLCopenXML записан: C:/Users/Ольга/OneDrive/Рабочий стол/CODESYS/8080_EMU/src/probe_dialect.plcopenxml (43072 символов)
+[2] projects.create OK
+[2] proj.add(device) OK
+[3] application = Application
+[4] create_gvl OK -> GVL_PROBE  has_textual_declaration=True
+[4] textual_declaration -> <_3S.CoDeSys.ScriptDriverProjects.ScriptTextDocument object at 0x0000000000000087 [_3S.CoDeSys.ScriptDriverProjects.ScriptTextDocument]>
+[4] replace -> OK; text now: u'VAR_GLOBAL\n\t(* \u041e\u0431\u0449\u0430\u044f \u0448\u0438\u043d\u0430 \u0434\u0430\u043d\u043d\u044b\u0445 \u044d\u043c\u0443\u043b\u044f\u0442\u043e\u0440\u0430 Intel 8080 *)\n\tBus_Data : BYTE;\n\tBus_Addr : WORD;\nEND_VAR\n'
+[5] create_dut OK -> ST_PROBE
+[5] replace -> OK; text now: u'TYPE ST_PROBE :\nSTRUCT\n\t(* \u041f\u0440\u043e\u0431\u043d\u0430\u044f \u0441\u0442\u0440\u0443\u043a\u0442\u0443\u0440\u0430 *)\n\tA : BYTE;\n\tB : WORD;\nEND_STRUCT\nEND_TYPE\n'
+[6] import_xml OK
+[7] ГЕНЕРАЦИЯ   : блоков=28 вход.перем=14 выход.перем=27 связей=84 пустых.входов=0
+[7] --- ДЕРЕВО ПРОЕКТА ПОСЛЕ ИМПОРТА ---
+- Application [ExtendedObject[IScriptObject]]
+  - Library Manager [ExtendedObject[IScriptObject]]
+  - GVL_PROBE [ExtendedObject[IScriptObject]]
+  - ST_PROBE [ExtendedObject[IScriptObject]]
+[7] поиск FB_OP_PROBE -> None
+[8] saved
+[9] build() -> None
+=== DONE ===

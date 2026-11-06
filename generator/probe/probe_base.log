@@ -1,0 +1,31 @@
+[i] BASE = C:/Users/Ольга/OneDrive/Рабочий стол/CODESYS/8080_EMU/generator/probe
+[i] ROOT = C:/Users/Ольга/OneDrive/Рабочий стол/CODESYS/8080_EMU
+[i] python = 2.7.7 (CODESYS.exe CODESYS V3.5 SP17 Patch 3, ScriptEngine.plugin 4.0.0.0)
+[1] projects.create OK
+- ? [ExtendedObject[IScriptProject]]
+  - Project Settings [ExtendedObject[IScriptObject]]
+  - __VisualizationStyle [ExtendedObject[IScriptObject]]
+[1] active_application FAILED: Traceback (most recent call last):
+  File "C:\Users\Ольга\OneDrive\Рабочий стол\CODESYS\8080_EMU\generator\probe\probe_base.py", line 48, in <module>
+    L(u"[1] active_application -> %r" % (pr.active_application,))
+ValueError: Для объектов скриптов требуются непустые Guid.
+
+[2] FAILED
+Traceback (most recent call last):
+  File "C:\Users\Ольга\OneDrive\Рабочий стол\CODESYS\8080_EMU\generator\probe\probe_base.py", line 61, in <module>
+    p2 = projects.open(work)
+SystemError: A primary project is already open at C:\Users\Ольга\OneDrive\Рабочий стол\CODESYS\8080_EMU\build\probe_created.project
+
+[3] C:/Program Files (x86)/CODESYS 3.5.17.30/CODESYS/Projects/SoftMotion/4.10.0.0/Examples/Tutorial/CNCdirect.project FAILED
+Traceback (most recent call last):
+  File "C:\Users\Ольга\OneDrive\Рабочий стол\CODESYS\8080_EMU\generator\probe\probe_base.py", line 93, in <module>
+    p3 = projects.open(cand)
+SystemError: A primary project is already open at C:\Users\Ольга\OneDrive\Рабочий стол\CODESYS\8080_EMU\build\probe_created.project
+
+[3] C:/Program Files (x86)/CODESYS 3.5.17.30/CODESYS/Projects/SoftMotion/4.10.0.0/Examples/Tutorial/PLCopenSingle.project FAILED
+Traceback (most recent call last):
+  File "C:\Users\Ольга\OneDrive\Рабочий стол\CODESYS\8080_EMU\generator\probe\probe_base.py", line 93, in <module>
+    p3 = projects.open(cand)
+SystemError: A primary project is already open at C:\Users\Ольга\OneDrive\Рабочий стол\CODESYS\8080_EMU\build\probe_created.project
+
+=== DONE ===

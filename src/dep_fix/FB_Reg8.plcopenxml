@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project xmlns="http://www.plcopen.org/xml/tc6_0200">
+  <fileHeader companyName="" productName="CODESYS" productVersion="CODESYS V3.5 SP17 Patch 3" creationDateTime="2026-01-01T00:00:00" />
+  <contentHeader name="FB_Reg8">
+    <coordinateInfo>
+      <fbd><scaling x="1" y="1" /></fbd>
+      <ld><scaling x="1" y="1" /></ld>
+      <sfc><scaling x="1" y="1" /></sfc>
+    </coordinateInfo>
+  </contentHeader>
+  <types>
+    <dataTypes />
+    <pous>
+      <pou name="FB_Reg8" pouType="functionBlock">
+        <interface>
+          <inputVars>
+            <variable name="D"><type><BYTE /></type></variable>
+            <variable name="LDx"><type><BOOL /></type></variable>
+            <variable name="CLR"><type><BOOL /></type></variable>
+          </inputVars>
+          <outputVars>
+            <variable name="Q"><type><BYTE /></type></variable>
+          </outputVars>
+        </interface>
+        <body>
+          <FBD>
+            <!-- СЕТЬ 1. Защёлкивание и сброс: Q := CLR ? 0 : (LD ? D : Q) -->
+            <inVariable localId="1" height="10" width="29">
+              <position x="40" y="40" />
+              <connectionPointOut><relPosition x="29" y="5" /></connectionPointOut>
+              <expression>D</expression>
+            </inVariable>
+            <inVariable localId="2" height="10" width="38">
+              <position x="40" y="70" />
+              <connectionPointOut><relPosition x="38" y="5" /></connectionPointOut>
+              <expression>LDx</expression>
+            </inVariable>
+            <inVariable localId="3" height="10" width="47">
+              <position x="40" y="100" />
+              <connectionPointOut><relPosition x="47" y="5" /></connectionPointOut>
+              <expression>CLR</expression>
+            </inVariable>
+            <inVariable localId="4" height="10" width="74">
+              <position x="40" y="130" />
+              <connectionPointOut><relPosition x="74" y="5" /></connectionPointOut>
+              <expression>BYTE#0</expression>
+            </inVariable>
+            <inVariable localId="5" height="10" width="29">
+              <position x="40" y="160" />
+              <connectionPointOut><relPosition x="29" y="5" /></connectionPointOut>
+              <expression>Q</expression>
+            </inVariable>
+            <block localId="6" typeName="SEL" height="40" width="76">
+              <position x="200" y="190" />
+              <inputVariables>
+                <variable formalParameter="G">
+                  <connectionPointIn>
+                    <relPosition x="0" y="5" />
+                    <connection refLocalId="2" />
+                  </connectionPointIn>
+                </variable>
+                <variable formalParameter="IN0">
+                  <connectionPointIn>
+                    <relPosition x="0" y="15" />
+                    <connection refLocalId="5" />
+                  </connectionPointIn>
+                </variable>
+                <variable formalParameter="IN1">
+                  <connectionPointIn>
+                    <relPosition x="0" y="25" />
+                    <connection refLocalId="1" />
+                  </connectionPointIn>
+                </variable>
+              </inputVariables>
+              <inOutVariables />
+              <outputVariables>
+                <variable formalParameter="OUT">
+                  <connectionPointOut>
+                    <relPosition x="76" y="5" />
+                  </connectionPointOut>
+                </variable>
+              </outputVariables>
+            </block>
+            <block localId="7" typeName="SEL" height="40" width="76">
+              <position x="360" y="220" />
+              <inputVariables>
+                <variable formalParameter="G">
+                  <connectionPointIn>
+                    <relPosition x="0" y="5" />
+                    <connection refLocalId="3" />
+                  </connectionPointIn>
+                </variable>
+                <variable formalParameter="IN0">
+                  <connectionPointIn>
+                    <relPosition x="0" y="15" />
+                    <connection refLocalId="6" />
+                  </connectionPointIn>
+                </variable>
+                <variable formalParameter="IN1">
+                  <connectionPointIn>
+                    <relPosition x="0" y="25" />
+                    <connection refLocalId="4" />
+                  </connectionPointIn>
+                </variable>
+              </inputVariables>
+              <inOutVariables />
+              <outputVariables>
+                <variable formalParameter="OUT">
+                  <connectionPointOut>
+                    <relPosition x="76" y="5" />
+                  </connectionPointOut>
+                </variable>
+              </outputVariables>
+            </block>
+            <outVariable localId="8" height="10" width="29">
+              <position x="520" y="250" />
+              <connectionPointIn>
+                <relPosition x="0" y="5" />
+                <connection refLocalId="7" />
+              </connectionPointIn>
+              <expression>Q</expression>
+            </outVariable>
+          </FBD>
+        </body>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/interfaceasplaintext" handleUnknown="implementation">
+            <InterfaceAsPlainText>
+              <xhtml xmlns="http://www.w3.org/1999/xhtml">FUNCTION_BLOCK FB_Reg8
+(* 8-разрядный регистр. Хранит байт между сканами PLC.
+	Входы:  D - данные, LD - защёлкнуть, CLR - сброс (приоритетнее LD)
+	Выходы: Q - текущее значение
+	Поведение: Q := CLR ? 0 : (LD ? D : Q). Чтение Q в этой же схеме
+	даёт значение ПРЕДЫДУЩЕГО скана - это и есть память регистра. *)
+VAR_INPUT
+	D : BYTE; (* входные данные *)
+	LDx : BOOL; (* защёлкнуть: Q := D *)
+	CLR : BOOL; (* сброс: Q := 0 (приоритет выше LD) *)
+END_VAR
+VAR_OUTPUT
+	Q : BYTE; (* текущее значение регистра *)
+END_VAR
+</xhtml>
+            </InterfaceAsPlainText>
+          </data>
+        </addData>
+      </pou>
+    </pous>
+  </types>
+  <instances>
+    <configurations />
+  </instances>
+</project>

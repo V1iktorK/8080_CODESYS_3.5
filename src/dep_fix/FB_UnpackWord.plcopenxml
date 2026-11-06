@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project xmlns="http://www.plcopen.org/xml/tc6_0200">
+  <fileHeader companyName="" productName="CODESYS" productVersion="CODESYS V3.5 SP17 Patch 3" creationDateTime="2026-01-01T00:00:00" />
+  <contentHeader name="FB_UnpackWord">
+    <coordinateInfo>
+      <fbd><scaling x="1" y="1" /></fbd>
+      <ld><scaling x="1" y="1" /></ld>
+      <sfc><scaling x="1" y="1" /></sfc>
+    </coordinateInfo>
+  </contentHeader>
+  <types>
+    <dataTypes />
+    <pous>
+      <pou name="FB_UnpackWord" pouType="functionBlock">
+        <interface>
+          <inputVars>
+            <variable name="W"><type><WORD /></type></variable>
+          </inputVars>
+          <outputVars>
+            <variable name="Lo"><type><BYTE /></type></variable>
+            <variable name="Hi"><type><BYTE /></type></variable>
+          </outputVars>
+          <localVars>
+            <variable name="up_lo"><type><derived name="FB_PackByte" /></type></variable>
+            <variable name="up_hi"><type><derived name="FB_PackByte" /></type></variable>
+          </localVars>
+        </interface>
+        <body>
+          <FBD>
+            <!-- СЕТЬ 1. Lo := упаковка битов W.0..W.7 -->
+            <inVariable localId="1" height="10" width="47">
+              <position x="40" y="40" />
+              <connectionPointOut><relPosition x="47" y="5" /></connectionPointOut>
+              <expression>W.0</expression>
+            </inVariable>
+            <inVariable localId="2" height="10" width="47">
+              <position x="40" y="70" />
+              <connectionPointOut><relPosition x="47" y="5" /></connectionPointOut>
+              <expression>W.1</expression>
+            </inVariable>
+            <inVariable localId="3" height="10" width="47">
+              <position x="40" y="100" />
+              <connectionPointOut><relPosition x="47" y="5" /></connectionPointOut>
+              <expression>W.2</expression>
+            </inVariable>
+            <inVariable localId="4" height="10" width="47">
+              <position x="40" y="130" />
+              <connectionPointOut><relPosition x="47" y="5" /></connectionPointOut>
+              <expression>W.3</expression>
+            </inVariable>
+            <inVariable localId="5" height="10" width="47">
+              <position x="40" y="160" />
+              <connectionPointOut><relPosition x="47" y="5" /></connectionPointOut>
+              <expression>W.4</expression>
+            </inVariable>
+            <inVariable localId="6" height="10" width="47">
+              <position x="40" y="190" />
+              <connectionPointOut><relPosition x="47" y="5" /></connectionPointOut>
+              <expression>W.5</expression>
+            </inVariable>
+            <inVariable localId="7" height="10" width="47">
+              <position x="40" y="220" />
+              <connectionPointOut><relPosition x="47" y="5" /></connectionPointOut>
+              <expression>W.6</expression>
+            </inVariable>
+            <inVariable localId="8" height="10" width="47">
+              <position x="40" y="250" />
+              <connectionPointOut><relPosition x="47" y="5" /></connectionPointOut>
+              <expression>W.7</expression>
+            </inVariable>
+            <block localId="9" typeName="FB_PackByte" instanceName="up_lo" height="90" width="136">
+              <position x="200" y="280" />
+              <inputVariables>
+                <variable formalParameter="B0">
+                  <connectionPointIn>
+                    <relPosition x="0" y="5" />
+                    <connection refLocalId="1" />
+                  </connectionPointIn>
+                </variable>
+                <variable formalParameter="B1">
+                  <connectionPointIn>
+                    <relPosition x="0" y="15" />
+                    <connection refLocalId="2" />
+                  </connectionPointIn>
+                </variable>
+                <variable formalParameter="B2">
+                  <connectionPointIn>
+                    <relPosition x="0" y="25" />
+                    <connection refLocalId="3" />
+                  </connectionPointIn>
+                </variable>
+                <variable formalParameter="B3">
+                  <connectionPointIn>
+                    <relPosition x="0" y="35" />
+                    <connection refLocalId="4" />
+                  </connectionPointIn>
+                </variable>
+                <variable formalParameter="B4">
+                  <connectionPointIn>
+                    <relPosition x="0" y="45" />
+                    <connection refLocalId="5" />
+                  </connectionPointIn>
+                </variable>
+                <variable formalParameter="B5">
+                  <connectionPointIn>
+                    <relPosition x="0" y="55" />
+                    <connection refLocalId="6" />
+                  </connectionPointIn>
+                </variable>
+                <variable formalParameter="B6">
+                  <connectionPointIn>
+                    <relPosition x="0" y="65" />
+                    <connection refLocalId="7" />
+                  </connectionPointIn>
+                </variable>
+                <variable formalParameter="B7">
+                  <connectionPointIn>
+                    <relPosition x="0" y="75" />
+                    <connection refLocalId="8" />
+                  </connectionPointIn>
+                </variable>
+              </inputVariables>
+              <inOutVariables />
+              <outputVariables>
+                <variable formalParameter="B">
+                  <connectionPointOut>
+                    <relPosition x="136" y="5" />
+                  </connectionPointOut>
+                </variable>
+              </outputVariables>
+            </block>
+            <outVariable localId="10" height="10" width="38">
+              <position x="520" y="310" />
+              <connectionPointIn>
+                <relPosition x="0" y="5" />
+                <connection refLocalId="9" />
+              </connectionPointIn>
+              <expression>Lo</expression>
+            </outVariable>
+            <!-- СЕТЬ 2. Hi := упаковка битов W.8..W.15 -->
+            <inVariable localId="11" height="10" width="47">
+              <position x="40" y="40" />
+              <connectionPointOut><relPosition x="47" y="5" /></connectionPointOut>
+              <expression>W.8</expression>
+            </inVariable>
+            <inVariable localId="12" height="10" width="47">
+              <position x="40" y="70" />
+              <connectionPointOut><relPosition x="47" y="5" /></connectionPointOut>
+              <expression>W.9</expression>
+            </inVariable>
+            <inVariable localId="13" height="10" width="56">
+              <position x="40" y="100" />
+              <connectionPointOut><relPosition x="56" y="5" /></connectionPointOut>
+              <expression>W.10</expression>
+            </inVariable>
+            <inVariable localId="14" height="10" width="56">
+              <position x="40" y="130" />
+              <connectionPointOut><relPosition x="56" y="5" /></connectionPointOut>
+              <expression>W.11</expression>
+            </inVariable>
+            <inVariable localId="15" height="10" width="56">
+              <position x="40" y="160" />
+              <connectionPointOut><relPosition x="56" y="5" /></connectionPointOut>
+              <expression>W.12</expression>
+            </inVariable>
+            <inVariable localId="16" height="10" width="56">
+              <position x="40" y="190" />
+              <connectionPointOut><relPosition x="56" y="5" /></connectionPointOut>
+              <expression>W.13</expression>
+            </inVariable>
+            <inVariable localId="17" height="10" width="56">
+              <position x="40" y="220" />
+              <connectionPointOut><relPosition x="56" y="5" /></connectionPointOut>
+              <expression>W.14</expression>
+            </inVariable>
+            <inVariable localId="18" height="10" width="56">
+              <position x="40" y="250" />
+              <connectionPointOut><relPosition x="56" y="5" /></connectionPointOut>
+              <expression>W.15</expression>
+            </inVariable>
+            <block localId="19" typeName="FB_PackByte" instanceName="up_hi" height="90" width="136">
+              <position x="200" y="280" />
+              <inputVariables>
+                <variable formalParameter="B0">
+                  <connectionPointIn>
+                    <relPosition x="0" y="5" />
+                    <connection refLocalId="11" />
+                  </connectionPointIn>
+                </variable>
+                <variable formalParameter="B1">
+                  <connectionPointIn>
+                    <relPosition x="0" y="15" />
+                    <connection refLocalId="12" />
+                  </connectionPointIn>
+                </variable>
+                <variable formalParameter="B2">
+                  <connectionPointIn>
+                    <relPosition x="0" y="25" />
+                    <connection refLocalId="13" />
+                  </connectionPointIn>
+                </variable>
+                <variable formalParameter="B3">
+                  <connectionPointIn>
+                    <relPosition x="0" y="35" />
+                    <connection refLocalId="14" />
+                  </connectionPointIn>
+                </variable>
+                <variable formalParameter="B4">
+                  <connectionPointIn>
+                    <relPosition x="0" y="45" />
+                    <connection refLocalId="15" />
+                  </connectionPointIn>
+                </variable>
+                <variable formalParameter="B5">
+                  <connectionPointIn>
+                    <relPosition x="0" y="55" />
+                    <connection refLocalId="16" />
+                  </connectionPointIn>
+                </variable>
+                <variable formalParameter="B6">
+                  <connectionPointIn>
+                    <relPosition x="0" y="65" />
+                    <connection refLocalId="17" />
+                  </connectionPointIn>
+                </variable>
+                <variable formalParameter="B7">
+                  <connectionPointIn>
+                    <relPosition x="0" y="75" />
+                    <connection refLocalId="18" />
+                  </connectionPointIn>
+                </variable>
+              </inputVariables>
+              <inOutVariables />
+              <outputVariables>
+                <variable formalParameter="B">
+                  <connectionPointOut>
+                    <relPosition x="136" y="5" />
+                  </connectionPointOut>
+                </variable>
+              </outputVariables>
+            </block>
+            <outVariable localId="20" height="10" width="38">
+              <position x="520" y="310" />
+              <connectionPointIn>
+                <relPosition x="0" y="5" />
+                <connection refLocalId="19" />
+              </connectionPointIn>
+              <expression>Hi</expression>
+            </outVariable>
+          </FBD>
+        </body>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/interfaceasplaintext" handleUnknown="implementation">
+            <InterfaceAsPlainText>
+              <xhtml xmlns="http://www.w3.org/1999/xhtml">FUNCTION_BLOCK FB_UnpackWord
+(* Разделение 16-разрядного слова на два байта.
+	Вход:  W - слово
+	Выходы: Lo - младший байт (W.0..W.7), Hi - старший (W.8..W.15)
+	Нужен там, где 16-разрядный результат надо положить в память
+	побайтно (PUSH/CALL/RST - адрес возврата, SHLD, DAD - пара HL).
+	Способ выделения байтов: bits. *)
+VAR_INPUT
+	W : WORD; (* исходное слово *)
+END_VAR
+VAR_OUTPUT
+	Lo : BYTE; (* младший байт *)
+	Hi : BYTE; (* старший байт *)
+END_VAR
+VAR
+	up_lo : FB_PackByte; (* упаковка битов W.0..W.7 в младший байт *)
+	up_hi : FB_PackByte; (* упаковка битов W.8..W.15 в старший байт *)
+END_VAR
+</xhtml>
+            </InterfaceAsPlainText>
+          </data>
+        </addData>
+      </pou>
+    </pous>
+  </types>
+  <instances>
+    <configurations />
+  </instances>
+</project>

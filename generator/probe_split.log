@@ -1,0 +1,13 @@
+=== БИСЕКЦИЯ №2: fan-out и межсетевые ссылки ===
+    projects.create OK -> C:/Users/Ольга/OneDrive/Рабочий стол/CODESYS/8080_EMU/build/probe_split.project
+    устройство добавлено: type=4096 id=0000 0001 version=3.5.17.30
+    application = Application
+    импортировано по одному файлу: 5 POU
+[3] --- ЧТО ДОЕХАЛО ---
+    T_FANOUT_A   ПОТЕРЯН
+    T_CROSS_B    ЕСТЬ
+    T_CROSS_C    ЕСТЬ
+    T_INDEP_D    ЕСТЬ
+    T_VAR_E      ЕСТЬ
+    build() выполнен (сообщения компилятора — в <скрипт>.stdout.txt)
+=== DONE ===
