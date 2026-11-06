@@ -93,8 +93,23 @@ Get-ChildItem $srcDir -Filter '*.py' -File | ForEach-Object { Copy-Item $_.FullN
 $staged = Join-Path $Stage ([System.IO.Path]::GetFileName($Script))
 $stdout = Join-Path $Stage ([System.IO.Path]::GetFileNameWithoutExtension($Script) + '.stdout.txt')
 
-# --- зависимости ядра: из отдельной папки dep_ccp (снимок src проекта 8080_CODESYS_3.5) ---
+# --- зависимости ядра ---------------------------------------------------------
+# gen_stage4.py ГЕНЕРИРУЕТ 27 POU-зависимостей заново из модулей-генераторов и
+# пишет их в src/dep_fix рабочего корня (codesys_build.resolve_dep_root), поэтому
+# для самой сборки внешний снимок НЕ нужен: быстрый старт работает сразу после
+# клонирования, на чистой машине и в новом рабочем каталоге. Снимок копируется
+# только если он есть - его ищут пробы и инструменты (gen_probe_run.py,
+# check_names.py, test_rename*.py); при отсутствии он создаётся из
+# src/dep_fix репозитория.
 $depDir = 'C:\dsh8080\work\dep_ccp'
+if (-not (Test-Path $depDir)) {
+    $repoSnap = Join-Path $ProjectRoot 'src\dep_fix'
+    if (Test-Path $repoSnap) {
+        New-Item -ItemType Directory -Force -Path $depDir | Out-Null
+        Copy-Item (Join-Path $repoSnap '*') -Destination $depDir -Force -ErrorAction SilentlyContinue
+        Write-Host "deps    : $depDir (создан из src\dep_fix репозитория)"
+    }
+}
 if (Test-Path $depDir) {
     Get-ChildItem $depDir -Filter '*.plcopenxml' -File -ErrorAction SilentlyContinue |
         ForEach-Object { Copy-Item $_.FullName -Destination (Join-Path $WorkRoot 'src') -Force }

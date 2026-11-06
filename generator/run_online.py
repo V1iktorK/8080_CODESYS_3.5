@@ -325,6 +325,32 @@ def _rd_many(oa, exprs):
     return d
 
 
+def console_dump(text):
+    u"""Дамп журнала консоли: строки по 64 знака + прямая запись управляющих.
+
+    НАЙДЕНО ПРИ ПОДГОТОВКЕ К ПУБЛИКАЦИИ: отчёт печатал журнал «как есть», а он
+    содержит CR/LF - каждый знак оказывался на СВОЕЙ строке, и дамп читался
+    как столбик "A>." В таком виде расхождение «проверки PASS, а в журнале
+    только приглашения» не видно ни автору, ни читателю. Здесь журнал
+    переносится по 64 знака, служебные коды показываются явно.
+    """
+    SHOW = {0x0D: u"\\r", 0x0A: u"\\n", 0x09: u"\\t", 0x1A: u"^Z", 0x03: u"^C"}
+    out = []
+    for b in range(0, len(text), 64):
+        chunk = text[b:b + 64]
+        row = []
+        for ch in chunk:
+            o = ord(ch)
+            if o in SHOW:
+                row.append(SHOW[o])
+            elif 32 <= o < 127:
+                row.append(ch)
+            else:
+                row.append(u"\\x%02X" % o)
+        out.append(u"%-64s | %02X" % (u"".join(row), b))
+    return u"\n".join(out)
+
+
 def console_text(data):
     u"""Расшифровать кольцевой журнал консоли CP/M в текст."""
     raw = data.get(u"GVL_CPM.Con_Log")
@@ -428,19 +454,27 @@ def write_report(root, data, L):
 
     w(u"\n## 3. Проверки слоя CP/M\n\n")
     w(u"| # | Что проверяется | Результат |\n|---|---|---|\n")
-    cpm_items = (u"приглашение A>", u"эхо команды DIR (D I R CR LF)",
-                 u"каталог: HELLO.COM (H, O, точка)",
-                 u"каталог: DIR.COM, приглашение после команды",
-                 u"длина журнала после DIR",
-                 u"эхо команды TYPE README.TXT",
-                 u"содержимое README.TXT (HELLO.COM)",
-                 u"счётчики CCP и ловушек",
-                 u"запуск настоящей .COM с диска (HELLO)")
+    cpm_items = (u"приглашение A>",
+                 u"эхо DIR в журнале (поиск «DI»)",
+                 u"каталог: имя HELLO (поиск в журнале)",
+                 u"завершение набора и рост журнала",
+                 u"каталог: расширение COM (поиск в журнале)",
+                 u"эхо TYPE в журнале (поиск «TY»)",
+                 u"содержимое README.TXT (поиск «HELLO.COM»)",
+                 u"счётчики CCP и ловушек (без содержимого)",
+                 u"реальный .COM: строка «HELLO FROM» в журнале")
     for i, t in enumerate(cpm_items):
         w(u"| %d | %s | %s |\n" % (i, t, _verdict(data, u"GVL_TEST.Cpm_Res", i)))
     w(u"\nЖурнал консоли CP/M (расшифровка GVL_CPM.Con_Log, длина %s):\n\n"
       % s(u"GVL_CPM.Con_Log_Len"))
-    w(u"```\n%s\n```\n" % console_text(data).replace(u"\r", u""))
+    _ctext = console_text(data)
+    w(u"```\n%s\n```\n" % _ctext.replace(u"\r", u""))
+    # Дамп с явными управляющими кодами и адресами: по нему видно, что именно
+    # напечатала система, а не только «сколько знаков» (проверки CP/M местами
+    # сравнивают ДЛИНУ журнала, поэтому дамп - единственное доказательство
+    # СОДЕРЖИМОГО вывода).
+    w(u"\nДамп журнала (64 знака в строке, служебные коды явно):\n\n")
+    w(u"```\n%s\n```\n" % console_dump(_ctext))
     # ДИАГНОСТИКА СЛОЯ CP/M. Без этих значений разбор провала набора CP/M
     # упирается в догадки: журнал консоли показывает только то, что CCP успел
     # НАПЕЧАТАТЬ, но не показывает, где именно он остановился.
@@ -449,6 +483,7 @@ def write_report(root, data, L):
     #   Cpm_Typed  - сколько знаков схеме удалось подать в консоль.
     w(u"\nДиагностика CP/M:\n\n```\n")
     for k in (u"GVL_CPM.CCP_Phase", u"GVL_CPM.CCP_Cnt", u"GVL_CPM.Con_Log_Len",
+              u"GVL_TEST.Cpm_Typed", u"GVL_TEST.Cpm_On",
               u"GVL_TEST.Cpm_Step", u"GVL_CPM.ConIn_Ready",
               u"GVL_CPM.ConIn_Char", u"GVL_TEST.Mode",
               u"GVL_CPM.Diag.Last_Func", u"GVL_CPM.Diag.Last_Err",

@@ -165,7 +165,7 @@ def main():
         # (а не берутся из снимка) и переименовываются ровно один раз, тем же
         # самым вызовом, что и остальные POU -> имена согласованы всегда.
         dep_old = ROOT + u"/src"
-        dep_fix = dep_old + u"/dep_fix"
+        dep_fix = cb.resolve_dep_root()
         if not os.path.isdir(dep_fix):
             try:
                 os.makedirs(dep_fix)
