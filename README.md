@@ -104,6 +104,43 @@ respective owners. This project is not affiliated with them.
 
 ---
 
+## Как выглядит схема
+
+Это не макеты: **картинки отрисованы из тех же сгенерированных PLCopenXML, что лежат в репозитории** —
+скриптом [`tools/render_fbd.py`](tools/render_fbd.py) (Python, без CODESYS и сторонних библиотек).
+Блоки, их координаты и связи взяты из файлов `src/s4_pous/*.plcopenxml`.
+
+**Дескриптор порта ввода-вывода** — `FB_IO_Dispatch`, сеть 1: по номеру порта из `GVL_IO_Map.Map[Port]`
+выбираются тип канала, инверсия, масштаб и режим отсутствующего канала:
+
+<img src="docs/images/img_fb_io_dispatch_port.png" width="620" alt="FB_IO_Dispatch, сеть 1: дескриптор порта">
+
+**Политика порта без канала** — `FB_IO_Dispatch`, сеть 5: `STUB` / `DIAG_OK` / `FAULT`, диагностика и счётчики:
+
+<img src="docs/images/img_fb_io_fault.png" width="900" alt="FB_IO_Dispatch, сеть 5: постобработка и режим порта без канала">
+
+**Watchdog такта** — `FB_Watchdog`, сеть 5: событие тайм-аута, защёлка и счётчик:
+
+<img src="docs/images/img_fb_watchdog_event.png" width="700" alt="FB_Watchdog, сеть 5: события тайм-аута такта">
+
+**Сброс CP/M** — `PLC_PRG_CPM`, сеть 3: процессор выключается, выставляются `PC`/`SP`, затем включается —
+правило «старт системы: выключить процессор → задать PC/SP → включить»:
+
+<img src="docs/images/img_plc_prg_reset.png" width="640" alt="PLC_PRG_CPM, сеть 3: сброс CP/M">
+
+Пересоздать картинки (после изменения схем и сборки):
+
+```powershell
+cd tools
+python render_fbd.py ..\src\s4_pous\FB_IO_Dispatch.plcopenxml 0 ..\docs\images\img_fb_io_dispatch_port.svg --title "FB_IO_Dispatch, сеть 1: дескриптор порта"
+```
+
+> Полный вид всех 124 сетей задаётся параметром `all` вместо номера сети. Скриншот из самого редактора CODESYS
+> в репозиторий не входит: картинку POU в SP17 отдаёт только внутренний компонент редактора (`POUImage.dll`,
+> в скриптовый API не входит), поэтому снимок возможен лишь вручную из GUI.
+
+---
+
 ## Как это устроено
 
 ```mermaid
@@ -260,7 +297,7 @@ python tools\check_names.py              # имена против ключев�
 ├── NOTICE.md                     ← атрибуция, товарные знаки, границы применимости
 ├── build/
 │   └── EMU8080_STAGE4.project    ← готовый проект CODESYS: открыть и запустить
-├── docs/                         ← 16 документов проекта (см. ниже)
+├── docs/                         ← 17 документов проекта (см. ниже) + картинки схем
 │   └── КОНСПЕКТЫ_ДЛЯ_КОЛЛЕГ/     ← сжатый курс: окружение, диалект FBD, ошибки, отладка
 ├── generator/                    ← то, из чего всё собирается
 │   ├── fbd_xml.py                ← генератор PLCopenXML: правила диалекта FBD
@@ -278,6 +315,7 @@ python tools\check_names.py              # имена против ключев�
 │   ├── gen_stage4.py             ← драйвер: сборка + задача + прогон + отчёт
 │   ├── run_online.py             ← онлайн-сессия в симуляции, чтение значений, отчёт
 │   └── tools/                    ← 44 инструмента: валидаторы, бисекция, раннеры
+├── tools/render_fbd.py           ← рендер FBD-схемы из PLCopenXML в SVG (для README)
 ├── report/                       ← отчёты о прогонах
 ├── src/dep_fix/                  ← снимок 27 POU-зависимостей ядра (вход повторной сборки)
 └── tests/                        ← где живут тесты и почему их не видно как .py
