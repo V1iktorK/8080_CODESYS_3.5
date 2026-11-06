@@ -6,7 +6,7 @@ import io, os, sys, shutil, traceback
 import scriptengine
 
 BASE = os.path.dirname(os.path.abspath(__file__)).replace("\\", "/")
-ROOT = BASE.rsplit("/", 2)[0]          # .../8080_EMU
+ROOT = BASE.rsplit("/", 2)[0]          # .../8080_CODESYS_3.5
 LOG  = BASE + "/probe_devices.log"
 f = io.open(LOG, "w", encoding="utf-8")
 

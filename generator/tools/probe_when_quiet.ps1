@@ -7,7 +7,7 @@ param(
     [int]$WaitMin = 6
 )
 $ErrorActionPreference = 'Continue'
-$gen = 'C:\Users\Ольга\OneDrive\Рабочий стол\CODESYS\8080_EMU\generator'
+$gen = 'C:\Users\Ольга\OneDrive\Рабочий стол\CODESYS\8080_CODESYS_3.5\generator'
 $name = [System.IO.Path]::GetFileNameWithoutExtension($Script)
 $logPath = "C:\dsh8080\work\emu_s4\log\$name.log"
 

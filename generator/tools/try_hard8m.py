@@ -13,7 +13,7 @@ u"""ПРОВЕРКА ПРОФИЛЯ ДИСКА HARD_8M (последний не�
 import io
 import sys
 
-GEN = u"C:/Users/Ольга/OneDrive/Рабочий стол/CODESYS/8080_EMU/generator"
+GEN = u"C:/Users/Ольга/OneDrive/Рабочий стол/CODESYS/8080_CODESYS_3.5/generator"
 P = GEN + u"/pou_cpm_defs.py"
 A = u"DISK_PROFILE = PROFILE_FLOPPY_256K"
 B = u"DISK_PROFILE = PROFILE_HARD_8M"

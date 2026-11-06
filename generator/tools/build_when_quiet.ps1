@@ -7,7 +7,7 @@ param(
 )
 $ErrorActionPreference = 'Continue'
 $logPath = 'C:\dsh8080\work\emu_s4\log\gen_stage4.log'
-$gen = 'C:\Users\Ольга\OneDrive\Рабочий стол\CODESYS\8080_EMU\generator'
+$gen = 'C:\Users\Ольга\OneDrive\Рабочий стол\CODESYS\8080_CODESYS_3.5\generator'
 
 function Test-Foreign {
     $busy = @(Get-CimInstance Win32_Process -Filter "Name='powershell.exe'" -ErrorAction SilentlyContinue |

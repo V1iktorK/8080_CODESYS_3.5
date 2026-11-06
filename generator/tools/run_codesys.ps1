@@ -16,7 +16,7 @@
 #       копируются обратно средствами PowerShell.
 #
 # Usage:
-#   run_codesys.ps1 -Script <путь\к\скрипту.py> [-ProjectRoot <папка 8080_EMU>] [-MaxAttempts 3]
+#   run_codesys.ps1 -Script <путь\к\скрипту.py> [-ProjectRoot <папка 8080_CODESYS_3.5>] [-MaxAttempts 3]
 
 param(
     [Parameter(Mandatory = $true)][string]$Script,

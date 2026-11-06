@@ -93,7 +93,7 @@ Get-ChildItem $srcDir -Filter '*.py' -File | ForEach-Object { Copy-Item $_.FullN
 $staged = Join-Path $Stage ([System.IO.Path]::GetFileName($Script))
 $stdout = Join-Path $Stage ([System.IO.Path]::GetFileNameWithoutExtension($Script) + '.stdout.txt')
 
-# --- зависимости ядра: из отдельной папки dep_ccp (снимок src проекта 8080_EMU) ---
+# --- зависимости ядра: из отдельной папки dep_ccp (снимок src проекта 8080_CODESYS_3.5) ---
 $depDir = 'C:\dsh8080\work\dep_ccp'
 if (Test-Path $depDir) {
     Get-ChildItem $depDir -Filter '*.plcopenxml' -File -ErrorAction SilentlyContinue |

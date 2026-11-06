@@ -20,16 +20,16 @@ Add-Type -Namespace Win32 -Name Nt -MemberDefinition @'
 [DllImport("ntdll.dll")] public static extern int NtResumeProcess(IntPtr h);
 '@
 
-$gen = 'C:\Users\Ольга\OneDrive\Рабочий стол\CODESYS\8080_EMU\generator'
+$gen = 'C:\Users\Ольга\OneDrive\Рабочий стол\CODESYS\8080_CODESYS_3.5\generator'
 $frozen = @()
 try {
-    # Замораживаем ВСЕ оболочки, кроме относящихся к нашему проекту (8080_EMU).
+    # Замораживаем ВСЕ оболочки, кроме относящихся к нашему проекту (8080_CODESYS_3.5).
     # Узкий фильтр по Z80 не работает: чужой цикл порождает НОВЫЕ обёртки уже
     # после заморозки, и каждая из них делает taskkill /IM CODESYS.exe /F.
-    # Наши собственные команды всегда содержат путь ...\8080_EMU\..., поэтому
+    # Наши собственные команды всегда содержат путь ...\8080_CODESYS_3.5\..., поэтому
     # они под правило не попадают.
     $foreign = @(Get-CimInstance Win32_Process -Filter "Name='powershell.exe' OR Name='pwsh.exe' OR Name='cmd.exe'" -ErrorAction SilentlyContinue |
-        Where-Object { $_.CommandLine -and ($_.CommandLine -notmatch '8080_EMU') -and
+        Where-Object { $_.CommandLine -and ($_.CommandLine -notmatch '8080_CODESYS_3.5') -and
                        ($_.CommandLine -match 'CODESYS|Z80|run_probe|audit|make_z80|gen_z80|bisect|run_quick|taskkill') })
     Write-Host ("чужих оболочек найдено: " + $foreign.Count)
     foreach ($p in $foreign) {

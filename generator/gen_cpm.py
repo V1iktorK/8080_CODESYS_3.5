@@ -65,7 +65,7 @@ def L(msg):
 # ОБЩИЕ с соседним проектом Z80_EMU (у него свои FB_Reg8/FB_Reg16/FB_Memory64K/
 # PLC_PRG). Его раннер копирует свои src/*.plcopenxml в ту же папку и способен
 # подменить зависимости ядра 8080. Поэтому зависимости берутся из ОТДЕЛЬНОЙ
-# папки C:\dsh8080\work\dep_ccp, снятой из src самого проекта 8080_EMU.
+# папки C:\dsh8080\work\dep_ccp, снятой из src самого проекта 8080_CODESYS_3.5.
 DEP_DIRS = (u"C:/dsh8080/work/dep_ccp", u"C:/dsh8080/work/dep_cpm")
 DEP_DIR = None
 for _d in DEP_DIRS:
