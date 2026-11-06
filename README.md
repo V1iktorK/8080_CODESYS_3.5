@@ -6,10 +6,10 @@
 Ни одной строки ST в логике. Ни одной готовой библиотеки. 218 тестов — 218 PASS.
 
 [![CODESYS](https://img.shields.io/badge/CODESYS-3.5%20SP17%20Patch%203-0b6eb8)](https://www.codesys.com/)
-[![Язык](https://img.shields.io/badge/логика-FBD%20(только)-c0392b)](#жёсткие-ограничения-проекта)
-[![Тесты](https://img.shields.io/badge/тесты-218%2F218%20PASS-2e7d32)](#результаты-проверено-прогоном)
-[![Блоков FBD](https://img.shields.io/badge/блоков%20FBD-5%202255-6a1b9a)](#масштаб)
-[![Лицензия](https://img.shields.io/badge/лицензия-CC%20BY%204.0-ef6c00)](LICENSE)
+[![Logic](https://img.shields.io/badge/logic-FBD%20only-c0392b)](#жёсткие-ограничения-проекта)
+[![Tests](https://img.shields.io/badge/tests-218%2F218%20PASS-2e7d32)](#результаты-проверено-прогоном)
+[![FBD blocks](https://img.shields.io/badge/FBD%20blocks-5%20255-6a1b9a)](#масштаб)
+[![License](https://img.shields.io/badge/license-CC%20BY%204.0-ef6c00)](LICENSE)
 
 <sub>Русский — основной язык репозитория · English summary below</sub>
 
@@ -103,7 +103,7 @@ respective owners. This project is not affiliated with them.
 
 ```mermaid
 flowchart TB
-    subgraph SCAN["Один скан задачи MainTask (циклическая, T#5ms)"]
+    subgraph SCAN["Один скан задачи MainTask — циклическая, 5 мс"]
         direction TB
         A["1 · TEST_8080<br/>прогон таблицы из 199 кейсов"]
         B["2 · PLC_PRG_CPM<br/>FB_CPU8080_FULL — один такт 8080"]
@@ -112,7 +112,7 @@ flowchart TB
         E["5 · Аппаратный слой<br/>FB_IO_Dispatch → адаптер каналов"]
         A --> B --> C --> D --> E
     end
-    E --> F["GVL_IO — каналы<br/>Sim / SoftPLC / модули %IB %QB %IW %QW"]
+    E --> F["GVL_IO — каналы ввода-вывода<br/>Sim / SoftPLC / физические модули"]
     F --> G["GVL_HMI — всё для страницы визуализации"]
 ```
 
@@ -151,11 +151,11 @@ flowchart LR
     T --> BD["FB_BDOS<br/>+ 27 функций"]
     T --> BS["FB_BIOS<br/>+ 17 функций"]
     T --> CC["FB_CCP<br/>встроенные DIR / TYPE"]
-    BD --> DE["FB_CPM_DirEngine<br/>каталог, блоки, FCB"]
-    BS --> DE
-    CC --> DE
+    BD --> ENG["FB_CPM_DirEngine<br/>каталог, блоки, FCB"]
+    BS --> ENG
+    CC --> ENG
     CC --> LD["FB_COM_Loader<br/>загрузка .COM в TPA"]
-    DE --> DSK["GVL_DISK — образ диска<br/>128 байт/сектор"]
+    ENG --> DSK["GVL_DISK — образ диска<br/>128 байт/сектор"]
 ```
 
 * В эмулируемой памяти по адресам CP/M лежат **настоящие команды перехода**: `0000h: JMP 0E003h` (RST 0 → WBOOT),
